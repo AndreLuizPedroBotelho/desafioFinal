@@ -1,0 +1,10 @@
+node_modules
+yarn.lock
+.env
+switcher_backup.env
+/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+yarn.lock
+package-lock.json

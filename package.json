@@ -1,0 +1,11 @@
+{
+  "name": "desafioFinal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/AndreLuizPedroBotelho/desafioFinal.git",
+  "license": "MIT",
+  "scripts": {
+    "start-backend": "cd backend && yarn dev",
+    "start-frontend": "cd frontend && yarn start"
+  }
+}
