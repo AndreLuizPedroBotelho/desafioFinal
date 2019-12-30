@@ -3,13 +3,26 @@ import Plan from '../models/Plan';
 
 class PlanController {
   async index(req, res) {
-    const { page = 1 } = req.query;
     const plans = await Plan.findAll({
       order: ['title'],
-      limit: 20,
-      offset: (page - 1) * 20,
+      attributes: ['id', 'title', 'duration', 'price'],
     });
+
     res.json(plans);
+  }
+
+  async show(req, res) {
+    const { planId } = req.params;
+
+    const plan = await Plan.findByPk(planId, {
+      attributes: ['id', 'title', 'duration', 'price', 'priceDuration'],
+    });
+
+    if (!plan) {
+      return res.status(400).json({ error: 'Plan does not exists.' });
+    }
+
+    return res.json(plan);
   }
 
   async store(req, res) {

@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import api from '~/services/api';
 import history from '~/services/history';
+import InputMask from 'react-input-mask';
+import IntlCurrencyInput from "react-intl-currency-input"
+import CurrencyFormat from 'react-currency-format';
 
 import {
   Container,
@@ -15,41 +18,90 @@ import {
   Wrapper,
 } from './styles';
 
+const currencyConfig = {
+  locale: "pt-BR",
+  formats: {
+    number: {
+      BRL: {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      },
+    },
+  },
+};
+
 const schema = Yup.object().shape({
-  name: Yup.string().required('O nome é obrigatório'),
-  email: Yup.string()
-    .email('Insira um e-mail válido')
-    .required('O e-mail é obrigatório'),
-  age: Yup.number()
-    .typeError('Insira uma idade válida')
-    .required('A idade é obrigatória'),
-  weight: Yup.number()
-    .typeError('Insira um peso (em kg) válido')
-    .required('o peso é obrigatório'),
-  height: Yup.number()
-    .typeError('Insira uma altura válida')
-    .required('A altura é obrigatório'),
+  title: Yup.string().required('O título do plano é obrigatório'),
+  duration: Yup.number().required('O título do plano é obrigatório'),
+  price: Yup.string().required('O título do plano é obrigatório'),
 });
 
 export default function PlanCreate(props) {
-  console.log(props.match.params.id);
-  const [students, setStudent] = useState([]);
+  const [plan, setPlan] = useState([]);
   const [price, setPrice] = useState(0);
-  const [duration, setDuration] = useState(0);
 
-  async function handleSubmit(data, { resetForm }) {
+  const [duration, setDuration] = useState();
+  const [priceDuration, setPriceDuration] = useState(0);
+
+  const idPlan = props.match.params.id;
+
+  useEffect(() => {
+    async function loadPlan() {
+      const { data } = await api.get(`plans/${idPlan}`, {});
+      setPlan(data);
+
+      setPrice(data.price);
+      setDuration(data.duration);
+    }
+
+    if (idPlan) {
+      loadPlan();
+    }
+  }, []);
+
+  useEffect(() => {
+    const priceCalc = parseFloat(price) || 0;
+    const durationCalc = parseInt(duration) || 0;
+
+    const formato = { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' }
+
+    const total = (priceCalc * durationCalc) || 0
+
+    setPriceDuration(total.toLocaleString('pt-BR', formato));
+
+  }, [price, duration]);
+
+
+  async function handleSubmit(data) {
     try {
-      await api.post('student', data);
-      toast.success('Aluno cadastrado');
-      history.push('/student');
+      if (idPlan) {
+        await api.put(`plans/${idPlan}`, data);
+        toast.success('Plano atualizado');
+      } else {
+        await api.post('plans', data);
+        toast.success('Plano cadastrado');
+      }
+
+      history.push('/plan');
     } catch (err) {
       toast.error('Falha no cadastro, verifique seus dados');
     }
   }
 
+  const handleChangePrice = (e) => {
+    e.preventDefault();
+
+    let price = e.target.value;
+    price = price.replace('R$ ', '').split(".").join("").replace(',', '.');
+
+    setPrice(price)
+  };
+
   return (
     <Container>
-      <Form schema={schema} onSubmit={handleSubmit}>
+      <Form schema={schema} onSubmit={handleSubmit} initialData={plan}  >
         <ContainerTitle>
           <span>Cadastro de plano</span>
           <Wrapper>
@@ -67,23 +119,26 @@ export default function PlanCreate(props) {
           <FormDivLine width={100} divFather>
             <FormDivLine width={30}>
               <label>DURAÇÃO (em meses)</label>
-              <Input name="duration" value={duration} onChange={e => setDuration(e.target.value)}
+              <Input name="duration" type="number" value={duration} onChange={e => setDuration(e.target.value)}
               />
             </FormDivLine>
 
             <FormDivLine width={30}>
               <label>PREÇO MENSAL</label>
-              <Input name="price" value={price} onChange={e => setPrice(e.target.value)} />
+              <CurrencyFormat value={parseFloat(price)} decimalSeparator={','} fixedDecimalScale={true} decimalScale={2}
+                thousandSeparator={'.'} prefix={'R$ '} onChange={e => handleChangePrice(e)} />
+              <Input name="price" value={price} style={{ display: 'none' }} />
             </FormDivLine>
 
 
             <FormDivLine width={30}>
               <label>PREÇO TOTAL</label>
-              <Input name="height" value={price * duration} disabled />
+              <Input name="priceDuration" value={priceDuration} disabled />
             </FormDivLine>
+
           </FormDivLine>
         </FormDiv>
       </Form>
-    </Container>
+    </Container >
   );
 }

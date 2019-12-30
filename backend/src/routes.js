@@ -72,6 +72,7 @@ routes.put('/help-orders/:helpOrdersId/answer', AnswerController.update);
 routes.put('/plans/:planId', PlanController.update);
 routes.post('/plans', PlanController.store);
 routes.get('/plans', PlanController.index);
+routes.get('/plans/:planId', PlanController.show);
 routes.delete('/plans/:planId', PlanController.delete);
 
 /**

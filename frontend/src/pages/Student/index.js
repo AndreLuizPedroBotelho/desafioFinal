@@ -31,7 +31,7 @@ export default function Student() {
 
   async function handleDelete(student) {
     Swal.fire({
-      title: 'Confirmação!',
+      title: 'Confirmação',
       text: `Você gostaria de deletar o aluno ${student.name}?`,
       icon: 'question',
       confirmButtonText: 'Sim',

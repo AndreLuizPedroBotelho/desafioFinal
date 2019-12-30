@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '~/services/api';
+import Swal from 'sweetalert2';
 
 import {
   Container,
@@ -11,7 +12,41 @@ import {
   Wrapper,
 } from './styles';
 
-export default function Student() {
+export default function Plan() {
+  const [plans, setPlans] = useState([]);
+  const [plansChange, setPlansChange] = useState();
+
+  useEffect(() => {
+    async function loadPlan() {
+      const { data } = await api.get('plans');
+      const formato = { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' }
+
+      await data.map((value, index) => {
+        value.price = parseFloat(value.price).toLocaleString('pt-BR', formato)
+      })
+
+      setPlans(data);
+    }
+
+    loadPlan();
+  }, [plansChange]);
+
+  async function handleDelete(plan) {
+    Swal.fire({
+      title: 'Confirmação',
+      text: `Você gostaria de deletar o plano ${plan.title}?`,
+      icon: 'question',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não',
+      showCancelButton: true,
+      preConfirm: async () => {
+        await api.delete(`plans/${plan.id}`, {});
+        setPlansChange(true);
+      }
+
+    })
+  }
+
   return (
     <Container>
       <ContainerTitle>
@@ -31,51 +66,21 @@ export default function Student() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Peter</td>
-            <td>Griffin</td>
-            <td>$100</td>
-            <td className="actions">
-              <LinkHref to="/profile" light="true" color="blue">
-                editar
-              </LinkHref>
-              <Button color="red">apagar</Button>
-            </td>
-          </tr>
-          <tr>
-            <td>Lois</td>
-            <td>Griffin</td>
-            <td>$150</td>
-            <td className="actions">
-              <LinkHref to="/profile" light="true" color="blue">
-                editar
-              </LinkHref>
-              <Button color="red">apagar</Button>
-            </td>
-          </tr>
-          <tr>
-            <td>Joe</td>
-            <td>Swanson</td>
-            <td>$300</td>
-            <td className="actions">
-              <LinkHref to="/profile" light="true" color="blue">
-                editar
-              </LinkHref>
-              <Button color="red">apagar</Button>
-            </td>
-          </tr>
-          <tr>
-            <td>Cleveland</td>
-            <td>Brown</td>
-            <td>$250</td>
-            <td className="actions">
-              <LinkHref to="/profile" light="true" color="blue">
-                editar
-              </LinkHref>
-              <Button color="red">apagar</Button>
-            </td>
-          </tr>
+          {plans.map(plan => (
+            <tr key={plan.id}>
+              <td>{plan.title}</td>
+              <td>{plan.duration}</td>
+              <td>{plan.price}</td>
+              <td className="actions">
+                <LinkHref to={`/plan/save/${plan.id}`} light="true" color="blue">
+                  editar
+                  </LinkHref>
+                <Button color="red" onClick={() => handleDelete(plan)}>apagar</Button>
+              </td>
+            </tr>
+          ))}
         </tbody>
+
       </Table>
     </Container>
   );

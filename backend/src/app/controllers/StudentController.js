@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
-import Student from '../models/Student';
 import { Op } from 'sequelize';
+import Student from '../models/Student';
 
 class StudentController {
   async index(req, res) {
@@ -10,12 +10,12 @@ class StudentController {
       attributes: ['id', 'age', 'name', 'email'],
       where: {
         name: {
-          [Op.like]: `%${q}%`
-        }
+          [Op.like]: `%${q}%`,
+        },
       },
-    }
-    );
-    res.json(students);
+      order: [['id', 'DESC']],
+    });
+    return res.json(students);
   }
 
   async show(req, res) {
@@ -23,13 +23,13 @@ class StudentController {
 
     const student = await Student.findByPk(id, {
       attributes: ['id', 'age', 'name', 'email', 'weight', 'height'],
-    })
+    });
 
     if (!student) {
       return res.status(400).json({ error: 'Student does not exists.' });
     }
 
-    res.json(student);
+    return res.json(student);
   }
 
   async store(req, res) {
@@ -107,7 +107,7 @@ class StudentController {
     const { id } = req.params;
     const student = await Student.destroy({
       where: {
-        id
+        id,
       },
     });
 
