@@ -14,13 +14,14 @@ export default function Header() {
     { url: '/student', text: 'ALUNOS' },
     { url: '/plan', text: 'PLANOS' },
     { url: '/register', text: 'MATRÍCULAS' },
-    { url: '/helpRequest', text: 'PEDIDOS DE AUXÌLIO' },
+    { url: '/helpOrders', text: 'PEDIDOS DE AUXÌLIO' },
   ];
 
   function handleSignOut() {
     dispatch(signOut());
   }
 
+  // eslint-disable-next-line no-unused-vars
   const [routes, setRoutes] = useState(routesArray);
 
   return (

@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import api from '~/services/api';
-import history from '~/services/history';
-import InputMask from 'react-input-mask';
-import IntlCurrencyInput from "react-intl-currency-input"
 import CurrencyFormat from 'react-currency-format';
+import PropTypes from 'prop-types';
+import history from '~/services/history';
+import api from '~/services/api';
 
 import {
   Container,
@@ -18,34 +17,20 @@ import {
   Wrapper,
 } from './styles';
 
-const currencyConfig = {
-  locale: "pt-BR",
-  formats: {
-    number: {
-      BRL: {
-        style: "currency",
-        currency: "BRL",
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      },
-    },
-  },
-};
-
 const schema = Yup.object().shape({
   title: Yup.string().required('O título do plano é obrigatório'),
   duration: Yup.number().required('O título do plano é obrigatório'),
   price: Yup.string().required('O título do plano é obrigatório'),
 });
 
-export default function PlanCreate(props) {
+export default function PlanCreate({ match }) {
   const [plan, setPlan] = useState([]);
   const [price, setPrice] = useState(0);
 
   const [duration, setDuration] = useState();
   const [priceDuration, setPriceDuration] = useState(0);
 
-  const idPlan = props.match.params.id;
+  const idPlan = match.params.id;
 
   useEffect(() => {
     async function loadPlan() {
@@ -59,20 +44,22 @@ export default function PlanCreate(props) {
     if (idPlan) {
       loadPlan();
     }
-  }, []);
+  }, [idPlan]);
 
   useEffect(() => {
     const priceCalc = parseFloat(price) || 0;
-    const durationCalc = parseInt(duration) || 0;
+    const durationCalc = Number(duration) || 0;
 
-    const formato = { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' }
+    const formato = {
+      minimumFractionDigits: 2,
+      style: 'currency',
+      currency: 'BRL',
+    };
 
-    const total = (priceCalc * durationCalc) || 0
+    const total = priceCalc * durationCalc || 0;
 
     setPriceDuration(total.toLocaleString('pt-BR', formato));
-
   }, [price, duration]);
-
 
   async function handleSubmit(data) {
     try {
@@ -90,18 +77,22 @@ export default function PlanCreate(props) {
     }
   }
 
-  const handleChangePrice = (e) => {
+  const handleChangePrice = e => {
     e.preventDefault();
 
-    let price = e.target.value;
-    price = price.replace('R$ ', '').split(".").join("").replace(',', '.');
+    let priceChange = e.target.value;
+    priceChange = priceChange
+      .replace('R$ ', '')
+      .split('.')
+      .join('')
+      .replace(',', '.');
 
-    setPrice(price)
+    setPrice(priceChange);
   };
 
   return (
     <Container>
-      <Form schema={schema} onSubmit={handleSubmit} initialData={plan}  >
+      <Form schema={schema} onSubmit={handleSubmit} initialData={plan}>
         <ContainerTitle>
           <span>Cadastro de plano</span>
           <Wrapper>
@@ -119,26 +110,39 @@ export default function PlanCreate(props) {
           <FormDivLine width={100} divFather>
             <FormDivLine width={30}>
               <label>DURAÇÃO (em meses)</label>
-              <Input name="duration" type="number" value={duration} onChange={e => setDuration(e.target.value)}
+              <Input
+                name="duration"
+                type="number"
+                value={duration}
+                onChange={e => setDuration(e.target.value)}
               />
             </FormDivLine>
 
             <FormDivLine width={30}>
               <label>PREÇO MENSAL</label>
-              <CurrencyFormat value={parseFloat(price)} decimalSeparator={','} fixedDecimalScale={true} decimalScale={2}
-                thousandSeparator={'.'} prefix={'R$ '} onChange={e => handleChangePrice(e)} />
+              <CurrencyFormat
+                value={parseFloat(price)}
+                decimalSeparator=","
+                fixedDecimalScale
+                decimalScale={2}
+                thousandSeparator="."
+                prefix="R$ "
+                onChange={e => handleChangePrice(e)}
+              />
               <Input name="price" value={price} style={{ display: 'none' }} />
             </FormDivLine>
-
 
             <FormDivLine width={30}>
               <label>PREÇO TOTAL</label>
               <Input name="priceDuration" value={priceDuration} disabled />
             </FormDivLine>
-
           </FormDivLine>
         </FormDiv>
       </Form>
-    </Container >
+    </Container>
   );
 }
+
+PlanCreate.propTypes = {
+  match: PropTypes.element.isRequired,
+};

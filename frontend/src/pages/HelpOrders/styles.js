@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { lighten } from 'polished';
 
 export const Container = styled.div`

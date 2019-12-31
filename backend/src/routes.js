@@ -20,6 +20,24 @@ const routes = new Router();
 routes.post('/session', SessionController.store);
 
 /**
+ * StudentHelpOrders
+ */
+routes.post(
+  '/students/:studentId/help-orders',
+  StudentHelpOrderController.store
+);
+routes.get(
+  '/students/:studentId/help-orders',
+  StudentHelpOrderController.index
+);
+
+/**
+ * Checkins
+ */
+routes.post('/students/:studentId/checkins', CheckinController.store);
+routes.get('/students/:studentId/checkins', CheckinController.index);
+
+/**
  * Middlewares
  */
 routes.use(authMiddlewares);
@@ -39,32 +57,14 @@ routes.get('/student', StudentController.index);
 routes.delete('/student/:id', StudentController.delete);
 
 /**
- * Checkins
- */
-routes.post('/students/:studentId/checkins', CheckinController.store);
-routes.get('/students/:studentId/checkins', CheckinController.index);
-
-/**
  * HelpOrders
  */
-routes.get('/students/help-orders/dont-answer', HelpOrderController.index);
-
-/**
- * StudentHelpOrders
- */
-routes.post(
-  '/students/:studentId/help-orders',
-  StudentHelpOrderController.store
-);
-routes.get(
-  '/students/:studentId/help-orders',
-  StudentHelpOrderController.index
-);
+routes.get('/help-orders/answers', HelpOrderController.index);
 
 /**
  * Answer
  */
-routes.put('/help-orders/:helpOrdersId/answer', AnswerController.update);
+routes.put('/answer/:helpOrdersId', AnswerController.update);
 
 /**
  * Plans

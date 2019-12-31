@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import api from '~/services/api';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
+import api from '~/services/api';
 
 import {
   Container,
@@ -19,11 +20,16 @@ export default function Plan() {
   useEffect(() => {
     async function loadPlan() {
       const { data } = await api.get('plans');
-      const formato = { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' }
+      const formato = {
+        minimumFractionDigits: 2,
+        style: 'currency',
+        currency: 'BRL',
+      };
 
-      await data.map((value, index) => {
-        value.price = parseFloat(value.price).toLocaleString('pt-BR', formato)
-      })
+      await data.map((value, _) => {
+        value.price = parseFloat(value.price).toLocaleString('pt-BR', formato);
+        return value;
+      });
 
       setPlans(data);
     }
@@ -40,11 +46,17 @@ export default function Plan() {
       cancelButtonText: 'Não',
       showCancelButton: true,
       preConfirm: async () => {
-        await api.delete(`plans/${plan.id}`, {});
-        setPlansChange(true);
-      }
-
-    })
+        try {
+          await api.delete(`plans/${plan.id}`, {});
+          toast.success('Plano deletado com sucesso');
+          setPlansChange(true);
+        } catch (err) {
+          toast.error(
+            'Não é possível deletar, existe matrícula vinculada a esse plano'
+          );
+        }
+      },
+    });
   }
 
   return (
@@ -72,15 +84,20 @@ export default function Plan() {
               <td>{plan.duration}</td>
               <td>{plan.price}</td>
               <td className="actions">
-                <LinkHref to={`/plan/save/${plan.id}`} light="true" color="blue">
+                <LinkHref
+                  to={`/plan/save/${plan.id}`}
+                  light="true"
+                  color="blue"
+                >
                   editar
-                  </LinkHref>
-                <Button color="red" onClick={() => handleDelete(plan)}>apagar</Button>
+                </LinkHref>
+                <Button color="red" onClick={() => handleDelete(plan)}>
+                  apagar
+                </Button>
               </td>
             </tr>
           ))}
         </tbody>
-
       </Table>
     </Container>
   );

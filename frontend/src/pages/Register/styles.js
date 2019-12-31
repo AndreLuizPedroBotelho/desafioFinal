@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { lighten } from 'polished';
 
 export const Container = styled.div`
-  margin: 0% 1%;
+  margin: 0% 3%;
 `;
 
 export const ContainerTitle = styled.div`

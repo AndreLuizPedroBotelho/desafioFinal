@@ -1,10 +1,12 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
+import InputMask from 'react-input-mask';
+import PropTypes from 'prop-types';
 import api from '~/services/api';
 import history from '~/services/history';
-import InputMask from 'react-input-mask';
 
 import {
   Container,
@@ -23,40 +25,43 @@ const schema = Yup.object().shape({
   email: Yup.string()
     .email('Insira um e-mail válido')
     .required('O e-mail é obrigatório'),
-  age: Yup.number().integer()
+  age: Yup.number()
+    .integer()
     .typeError('Insira uma idade válida')
     .required('A idade é obrigatória'),
-  weight: Yup.number().integer()
+  weight: Yup.number()
+    .integer()
     .typeError('Insira um peso (em kg) válido')
     .required('o peso é obrigatório'),
-  height: Yup.string().matches(maskHeight, 'Insira uma altura válida')
+  height: Yup.string()
+    .matches(maskHeight, 'Insira uma altura válida')
     .required('A altura é obrigatório'),
 });
 
-export default function StudentCreate(props) {
+export default function StudentCreate({ match }) {
   const [student, setStudent] = useState([]);
   const [weight, setWeight] = useState();
   const [age, setAge] = useState();
   const [height, setHeight] = useState();
 
-  const idStudent = props.match.params.id;
+  const idStudent = match.params.id;
 
   useEffect(() => {
     async function loadStudent() {
       const { data } = await api.get(`student/${idStudent}`, {});
       setStudent(data);
 
-      const height = String(data.height).replace('.', ',');
+      const heightChange = String(data.height).replace('.', ',');
 
       setWeight(data.weight);
       setAge(data.age);
-      setHeight(height);
+      setHeight(heightChange);
     }
 
     if (idStudent) {
       loadStudent();
     }
-  }, []);
+  }, [idStudent]);
 
   async function handleSubmit(data) {
     try {
@@ -77,7 +82,6 @@ export default function StudentCreate(props) {
   }
 
   return (
-
     <Container>
       <Form schema={schema} onSubmit={handleSubmit} initialData={student}>
         <ContainerTitle>
@@ -102,27 +106,46 @@ export default function StudentCreate(props) {
           <FormDivLine width={100} divFather>
             <FormDivLine width={30}>
               <label>IDADE</label>
-              <InputMask mask='999' maskChar={''} value={age} onChange={e => setAge(e.target.value)}>
+              <InputMask
+                mask="999"
+                maskChar=""
+                value={age}
+                onChange={e => setAge(e.target.value)}
+              >
                 {() => <Input name="age" type="text" />}
               </InputMask>
             </FormDivLine>
 
             <FormDivLine width={30}>
               <label>PESO (em kg)</label>
-              <InputMask mask='999' maskChar={''} value={weight} onChange={e => setWeight(e.target.value)}>
+              <InputMask
+                mask="999"
+                maskChar=""
+                value={weight}
+                onChange={e => setWeight(e.target.value)}
+              >
                 {() => <Input name="weight" type="text" />}
               </InputMask>
             </FormDivLine>
 
             <FormDivLine width={30}>
               <label>Altura</label>
-              <InputMask mask='9,99' maskChar={''} value={height} onChange={e => setHeight(e.target.value)}>
+              <InputMask
+                mask="9,99"
+                maskChar=""
+                value={height}
+                onChange={e => setHeight(e.target.value)}
+              >
                 {() => <Input name="height" type="text" />}
               </InputMask>
             </FormDivLine>
           </FormDivLine>
         </FormDiv>
       </Form>
-    </Container >
+    </Container>
   );
 }
+
+StudentCreate.propTypes = {
+  match: PropTypes.element.isRequired,
+};

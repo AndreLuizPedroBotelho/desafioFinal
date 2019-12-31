@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { lighten } from 'polished';
 
 export const Container = styled.div`
-  margin: 0% 20%;
+  margin: 0% 15%;
 `;
 
 export const ContainerTitle = styled.div`
@@ -58,24 +58,10 @@ export const FormDiv = styled.div`
   background-color: #fff;
   padding: 17px 25px;
   margin-top: 20px;
-
-  input {
-    height: 45px;
-    width: 100%;
-    padding: 0 15px;
-    border-radius: 4px;
-    border: 1px solid #dddddd;
-    color: #999999;
-    font-size: 14px;
-    margin: 5px 0;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
-    margin-bottom: 13px;
-  }
 `;
 
 export const FormDivLine = styled.div`
-  margin-bottom: 5px;
+  margin-bottom: ${props => (props.divHeight ? '20px' : '5px')};
   width: ${props => props.width && `${props.width}%`};
   display: flex;
   flex-direction: ${props => (props.divFather ? 'row' : 'column')};
@@ -88,7 +74,7 @@ export const FormDivLine = styled.div`
   }
 
   input {
-    height: 45px;
+    height: ${props => !props.divHeight && '45px'};
     width: 100%;
     padding: 0 15px;
     border-radius: 4px;
@@ -100,6 +86,23 @@ export const FormDivLine = styled.div`
     transition: 0.2s;
     margin-bottom: 13px;
     margin-right: 5%;
+  }
+
+  select {
+    height: 45px;
+    width: 100%;
+    padding: 0 15px;
+    border-radius: 4px;
+    border: 1px solid #dddddd;
+    color: #999999;
+    font-size: 14px;
+    margin: 5px 0;
+    -webkit-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    margin-bottom: 13px;
+    margin-right: 5%;
+    background-color: white;
   }
 `;
 

@@ -38,6 +38,10 @@ export default createGlobalStyle`
     list-style:none;
   }
 
+  textarea{
+    resize: none;
+  }
+
   button{
     cursor:pointer;
   }

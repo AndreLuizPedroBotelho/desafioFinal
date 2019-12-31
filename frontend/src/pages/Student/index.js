@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import api from '~/services/api';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
+import api from '~/services/api';
 
 import {
   Container,
@@ -28,7 +29,6 @@ export default function Student() {
     loadStudent();
   }, [studentChange, searchStudent]);
 
-
   async function handleDelete(student) {
     Swal.fire({
       title: 'Confirmação',
@@ -38,11 +38,17 @@ export default function Student() {
       cancelButtonText: 'Não',
       showCancelButton: true,
       preConfirm: async () => {
-        await api.delete(`student/${student.id}`, {});
-        setStudentChange(true);
-      }
-
-    })
+        try {
+          await api.delete(`student/${student.id}`, {});
+          toast.success('Aluno deletado com sucesso');
+          setStudentChange(true);
+        } catch (err) {
+          toast.error(
+            'Não é possível deletar, existe matrícula vinculada a esse aluno'
+          );
+        }
+      },
+    });
   }
 
   return (
@@ -51,7 +57,11 @@ export default function Student() {
         <span>Gerenciando alunos</span>
         <Wrapper>
           <Link to="/student/save">CADASTRAR</Link>
-          <input placeholder="Buscar aluno" value={searchStudent} onChange={e => setSearchStudent(e.target.value)} />
+          <input
+            placeholder="Buscar aluno"
+            value={searchStudent}
+            onChange={e => setSearchStudent(e.target.value)}
+          />
         </Wrapper>
       </ContainerTitle>
 
@@ -71,10 +81,16 @@ export default function Student() {
               <td>{student.email}</td>
               <td>{student.age}</td>
               <td className="actions">
-                <LinkHref to={`/student/save/${student.id}`} light="true" color="blue">
+                <LinkHref
+                  to={`/student/save/${student.id}`}
+                  light="true"
+                  color="blue"
+                >
                   editar
-              </LinkHref>
-                <Button color="red" onClick={() => handleDelete(student)}>apagar</Button>
+                </LinkHref>
+                <Button color="red" onClick={() => handleDelete(student)}>
+                  apagar
+                </Button>
               </td>
             </tr>
           ))}

@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import { Form, Input } from '@rocketseat/unform';
+import React, { useState, useEffect } from 'react';
+import { Form, Input, Select } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
+import { format } from 'date-fns';
 import api from '~/services/api';
 import history from '~/services/history';
+
+import Datepicker from '~/components/Datepicker';
+import ReactSelect from '~/components/ReactSelect';
 
 import {
   Container,
@@ -16,40 +20,71 @@ import {
 } from './styles';
 
 const schema = Yup.object().shape({
-  name: Yup.string().required('O nome é obrigatório'),
-  email: Yup.string()
-    .email('Insira um e-mail válido')
-    .required('O e-mail é obrigatório'),
-  age: Yup.number()
-    .typeError('Insira uma idade válida')
-    .required('A idade é obrigatória'),
-  weight: Yup.number()
-    .typeError('Insira um peso (em kg) válido')
-    .required('o peso é obrigatório'),
-  height: Yup.number()
-    .typeError('Insira uma altura válida')
-    .required('A altura é obrigatório'),
+  student_id: Yup.number().required('O aluno é obrigatório'),
+  plan_id: Yup.number().required('O plano é obrigatório'),
+  start_date: Yup.string().required('A data de início é obrigatorio'),
 });
 
-export default function RegisterCreate(props) {
-  console.log(props.match.params.id);
-  const [students, setStudent] = useState([]);
+export default function RegisterCreate() {
+  const [plans, setPlans] = useState([]);
+  const [student, setStudent] = useState([]);
 
-  async function handleSubmit(data, { resetForm }) {
+  useEffect(() => {
+    async function loadRegistration() {
+      const { data } = await api.get('plans');
+      const planSelec = [];
+
+      await data.map(({ id, title }) => {
+        return planSelec.push({
+          id,
+          title,
+        });
+      });
+
+      setPlans(planSelec);
+    }
+
+    loadRegistration();
+  }, []);
+
+  async function handleSubmit(data) {
     try {
-      await api.post('student', data);
-      toast.success('Aluno cadastrado');
-      history.push('/student');
+      data.start_date = format(new Date(data.start_date), 'yyyy-MM-dd');
+      await api.post('registrations', data);
+      toast.success('Matrículas cadastrada');
+
+      history.push('/register');
     } catch (err) {
       toast.error('Falha no cadastro, verifique seus dados');
     }
   }
 
+  const filterStudents = async inputValue => {
+    const { data } = await api.get('student', {
+      params: { q: inputValue },
+    });
+
+    const options = [];
+
+    await data.map(({ id, name }) => {
+      return options.push({
+        id,
+        title: name,
+      });
+    });
+
+    return options;
+  };
+
+  const loadOptions = async (inputValue, callback) => {
+    callback(await filterStudents(inputValue));
+  };
+
   return (
     <Container>
       <Form schema={schema} onSubmit={handleSubmit}>
         <ContainerTitle>
-          <span>Cadastro de matrícula</span>
+          <span>Cadastro de Matrícula</span>
           <Wrapper>
             <LinkHref to="/register/">VOLTAR</LinkHref>
             <Button type="submit">SALVAR</Button>
@@ -57,29 +92,43 @@ export default function RegisterCreate(props) {
         </ContainerTitle>
 
         <FormDiv>
-          <FormDivLine>
-            <label>NOME COMPLETO</label>
-            <Input name="name" />
+          <FormDivLine divHeight>
+            <label>Aluno</label>
+
+            <ReactSelect
+              name="studentSelect"
+              placeholder="Selecione o Aluno"
+              loadOptions={loadOptions}
+              value={student}
+              set={setStudent}
+            />
+
+            <Input
+              name="student_id"
+              value={student}
+              style={{ display: 'none' }}
+            />
           </FormDivLine>
 
-          <FormDivLine>
-            <label>ENDEREÇO DE E-MAIL</label>
-            <Input name="email" type="email" />
-          </FormDivLine>
           <FormDivLine width={100} divFather>
-            <FormDivLine width={30}>
-              <label>IDADE</label>
-              <Input name="age" />
+            <FormDivLine width={35}>
+              <label>PLANO</label>
+              <Select name="plan_id" options={plans} />
             </FormDivLine>
 
-            <FormDivLine width={30}>
-              <label>PESO (em kg)</label>
-              <Input name="weight" />
+            <FormDivLine width={22}>
+              <label>DATA DE INÍCIO</label>
+              <Datepicker name="start_date" />
             </FormDivLine>
 
-            <FormDivLine width={30}>
-              <label>Altura</label>
-              <Input name="height" />
+            <FormDivLine width={22}>
+              <label>DATA DE TÉRMINO</label>
+              <Input name="end_date" disabled />
+            </FormDivLine>
+
+            <FormDivLine width={20}>
+              <label>VALOR FINAL</label>
+              <Input name="name" disabled />
             </FormDivLine>
           </FormDivLine>
         </FormDiv>

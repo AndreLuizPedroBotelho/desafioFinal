@@ -4,9 +4,9 @@ import { Switch } from 'react-router-dom';
 import SignIn from '../pages/SignIn';
 
 /**
- * HelpRequest
+ * HelpOrders
  */
-import HelpRequest from '../pages/HelpRequest';
+import HelpOrders from '../pages/HelpOrders';
 
 /**
  * Student
@@ -33,7 +33,7 @@ export default function Routes() {
     <Switch>
       <Route path="/" exact component={SignIn} />
 
-      <Route path="/helpRequest" exact component={HelpRequest} isPrivate />
+      <Route path="/helpOrders" exact component={HelpOrders} isPrivate />
 
       <Route path="/student" exact component={Student} isPrivate />
       <Route path="/student/save/:id?" component={StudentCreate} isPrivate />
