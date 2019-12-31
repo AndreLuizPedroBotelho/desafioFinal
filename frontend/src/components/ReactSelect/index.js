@@ -1,18 +1,17 @@
 import React, { useRef, useEffect } from 'react';
 import AsyncSelect from 'react-select/async';
+import PropTypes from 'prop-types';
 
 import { useField } from '@rocketseat/unform';
 
 export default function ReactSelect({
   name,
   label,
-  options,
   loadOptions,
   multiple,
   placeholder,
   set,
   value,
-  ...rest
 }) {
   const ref = useRef(null);
   const { fieldName, registerField, error } = useField(name);
@@ -47,6 +46,7 @@ export default function ReactSelect({
         cacheOptions
         defaultOptions
         ref={ref}
+        placeholder={placeholder}
         onChange={option => set(option.id)}
         loadOptions={loadOptions}
         getOptionValue={option => option.title}
@@ -57,3 +57,13 @@ export default function ReactSelect({
     </>
   );
 }
+
+ReactSelect.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  loadOptions: PropTypes.func.isRequired,
+  multiple: PropTypes.element.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  set: PropTypes.func.isRequired,
+  value: PropTypes.element.isRequired,
+};

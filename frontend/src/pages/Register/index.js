@@ -90,7 +90,7 @@ export default function Register() {
               <td>{register.active}</td>
               <td className="actions">
                 <LinkHref
-                  to={`/plan/save/${register.id}`}
+                  to={`/register/save/${register.id}`}
                   light="true"
                   color="blue"
                 >

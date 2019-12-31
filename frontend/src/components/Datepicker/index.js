@@ -7,10 +7,14 @@ import { useField } from '@rocketseat/unform';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default function DatePicker({ name }) {
+export default function DatePicker({ name, value, onChange }) {
   const ref = useRef(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
-  const [selected, setSelected] = useState(defaultValue);
+  const { fieldName, registerField, error } = useField(name);
+  const [selected, setSelected] = useState(value);
+
+  useEffect(() => {
+    setSelected(value);
+  }, [value]);
 
   useEffect(() => {
     registerField({
@@ -30,7 +34,7 @@ export default function DatePicker({ name }) {
         name={fieldName}
         locale={pt}
         selected={selected}
-        onChange={date => setSelected(date)}
+        onChange={onChange}
         ref={ref}
         dateFormat="dd/MM/yyyy"
       />
@@ -41,4 +45,6 @@ export default function DatePicker({ name }) {
 
 DatePicker.propTypes = {
   name: PropTypes.string.isRequired,
+  value: PropTypes.element.isRequired,
+  onChange: PropTypes.func.isRequired,
 };

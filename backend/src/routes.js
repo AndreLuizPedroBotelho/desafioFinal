@@ -80,6 +80,7 @@ routes.delete('/plans/:planId', PlanController.delete);
  */
 routes.put('/registrations/:registrationId', RegistrationController.update);
 routes.post('/registrations', RegistrationController.store);
+routes.get('/registrations/:registrationId', RegistrationController.show);
 routes.get('/registrations', RegistrationController.index);
 routes.delete('/registrations/:registrationId', RegistrationController.delete);
 

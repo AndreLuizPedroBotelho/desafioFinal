@@ -5,7 +5,7 @@ class PlanController {
   async index(req, res) {
     const plans = await Plan.findAll({
       order: ['title'],
-      attributes: ['id', 'title', 'duration', 'price'],
+      attributes: ['id', 'title', 'duration', 'price', 'priceDuration'],
     });
 
     res.json(plans);
