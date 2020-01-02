@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import logo from '~/assets/logo-header.png';
-import { Image, Alert } from 'react-native';
+import { Image, Alert, Text } from 'react-native';
 
 import { ButtonClick, Container, Background, List } from './styles';
 
 import api from '~/services/api';
 
-export default function HelpOrder() {
+export default function HelpOrderList() {
   const [student, setStudent] = useState();
   const [checkinsChange, setCheckinsChange] = useState();
 
@@ -17,8 +17,6 @@ export default function HelpOrder() {
       setCheckinsChange(true)
     });
   }, []);
-
-
 
   async function handleClick() {
     try {
@@ -42,14 +40,13 @@ export default function HelpOrder() {
         <ButtonClick onPress={handleClick}>
           Novo pedido de auxílio
         </ButtonClick>
-
-
+        <Text>HelpOrderList</Text>
 
       </Container>
     </Background>
   );
 }
 
-HelpOrder.navigationOptions = {
+HelpOrderList.navigationOptions = {
   headerTitle: <Image resizeMode="contain" source={logo} />,
 }

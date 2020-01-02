@@ -1,6 +1,9 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
+/**
+ * SignIn
+ */
 import SignIn from '../pages/SignIn';
 
 /**
@@ -43,6 +46,8 @@ export default function Routes() {
 
       <Route path="/register" exact component={Register} isPrivate />
       <Route path="/register/save/:id?" component={RegisterCreate} isPrivate />
+
+      <Route />
     </Switch>
   );
 }

@@ -11,7 +11,7 @@ export default function ReactSelect({
   multiple,
   placeholder,
   set,
-
+  noOptionsMessage,
   value,
 }) {
   const ref = useRef(null);
@@ -45,6 +45,7 @@ export default function ReactSelect({
         isClearable
         cacheOptions
         defaultOptions
+        noOptionsMessage={() => noOptionsMessage}
         value={value && value}
         ref={ref}
         placeholder={placeholder}
@@ -60,6 +61,7 @@ export default function ReactSelect({
 ReactSelect.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  noOptionsMessage: PropTypes.string.isRequired,
   loadOptions: PropTypes.func.isRequired,
   multiple: PropTypes.element.isRequired,
   placeholder: PropTypes.string.isRequired,

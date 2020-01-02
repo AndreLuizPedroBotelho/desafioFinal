@@ -20,7 +20,6 @@ class StudentController {
 
   async show(req, res) {
     const { id } = req.params;
-
     const student = await Student.findByPk(id, {
       attributes: ['id', 'age', 'name', 'email', 'weight', 'height'],
     });

@@ -5,7 +5,6 @@ import Student from '../models/Student';
 
 class CheckinController {
   async index(req, res) {
-    const { page = 1 } = req.query;
     const { studentId } = req.params;
     const checkIsStudent = await Student.findByPk(studentId);
 
@@ -25,8 +24,6 @@ class CheckinController {
         },
       ],
       order: ['id'],
-      limit: 20,
-      offset: (page - 1) * 20,
     });
     return res.json(registrations);
   }

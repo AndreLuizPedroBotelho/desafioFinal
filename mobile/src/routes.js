@@ -7,9 +7,11 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import SignIn from './pages/SignIn';
 import Checkin from './pages/Checkin';
-import HelpOrder from './pages/HelpOrder';
-import logo from '~/assets/logo-header.png';
-import { Image } from 'react-native';
+
+import HelpOrderAnswer from './pages/HelpOrder/HelpOrderAnswer';
+import HelpOrderList from './pages/HelpOrder/HelpOrderList';
+import HelpOrderQuestion from './pages/HelpOrder/HelpOrderQuestion';
+
 
 export default () =>
   createAppContainer(
@@ -29,14 +31,16 @@ export default () =>
                   headerTitleAlign: 'center',
                 }
               ),
-              
+
               navigationOptions: {
                 title: 'Check-ins',
               }
             },
             HelpOrder: {
               screen: createStackNavigator({
-                HelpOrder
+                HelpOrderAnswer,
+                HelpOrderList,
+                HelpOrderQuestion,
               },
                 {
                   headerLayoutPreset: 'center',

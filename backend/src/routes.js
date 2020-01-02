@@ -20,6 +20,11 @@ const routes = new Router();
 routes.post('/session', SessionController.store);
 
 /**
+ * Student
+ */
+routes.get('/student/:id', StudentController.show);
+
+/**
  * StudentHelpOrders
  */
 routes.post(
@@ -52,7 +57,6 @@ routes.get('/users', UserController.index);
  */
 routes.post('/student', StudentController.store);
 routes.put('/student/:id', StudentController.update);
-routes.get('/student/:id', StudentController.show);
 routes.get('/student', StudentController.index);
 routes.delete('/student/:id', StudentController.delete);
 

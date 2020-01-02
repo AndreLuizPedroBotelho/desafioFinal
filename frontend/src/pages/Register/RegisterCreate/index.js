@@ -170,8 +170,9 @@ export default function RegisterCreate({ match }) {
 
             <ReactSelect
               name="student_id"
-              placeholder="Selecione o Aluno"
+              placeholder="Digite o nome de um Aluno"
               loadOptions={loadOptions}
+              noOptionsMessage="Nenhum Aluno"
               value={student}
               set={setSelectStudent}
             />
