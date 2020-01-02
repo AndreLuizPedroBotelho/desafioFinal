@@ -32,6 +32,7 @@ export default function Plan() {
       });
 
       setPlans(data);
+      setPlansChange(false);
     }
 
     loadPlan();
@@ -50,6 +51,7 @@ export default function Plan() {
           await api.delete(`plans/${plan.id}`, {});
           toast.success('Plano deletado com sucesso');
           setPlansChange(true);
+          return;
         } catch (err) {
           toast.error(
             'Não é possível deletar, existe matrícula vinculada a esse plano'

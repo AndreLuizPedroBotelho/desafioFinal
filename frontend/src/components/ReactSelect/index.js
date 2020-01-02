@@ -11,10 +11,11 @@ export default function ReactSelect({
   multiple,
   placeholder,
   set,
+
   value,
 }) {
   const ref = useRef(null);
-  const { fieldName, registerField, error } = useField(name);
+  const { fieldName, registerField } = useField(name);
 
   function parseSelectValue(selectRef) {
     const selectValue = selectRef.state.value;
@@ -40,20 +41,18 @@ export default function ReactSelect({
   return (
     <>
       {label && <label htmlFor={fieldName}>{label}</label>}
-
       <AsyncSelect
         isClearable
         cacheOptions
         defaultOptions
+        value={value && value}
         ref={ref}
         placeholder={placeholder}
-        onChange={option => set(option.id)}
+        onChange={option => set(option)}
         loadOptions={loadOptions}
         getOptionValue={option => option.title}
         getOptionLabel={option => option.title}
       />
-
-      {error && <span>{error}</span>}
     </>
   );
 }

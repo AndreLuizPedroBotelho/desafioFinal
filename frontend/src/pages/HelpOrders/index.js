@@ -23,6 +23,7 @@ export default function HelpOrders() {
       const { data } = await api.get('help-orders/answers');
 
       setHelpOrders(data);
+      setHelpOrderChange(false);
     }
 
     loadHelpOrders();

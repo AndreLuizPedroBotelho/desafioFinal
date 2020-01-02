@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input, Select } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import { format, parseISO, addMonths } from 'date-fns';
+import { format, parseISO, addMonths, addHours } from 'date-fns';
+
 import PropTypes from 'prop-types';
 import api from '~/services/api';
 import history from '~/services/history';
@@ -30,9 +31,11 @@ export default function RegisterCreate({ match }) {
   const [plans, setPlans] = useState([]);
   const [plansAll, setPlansAll] = useState([]);
 
-  const [student, setStudent] = useState([]);
   const [registration, setRegistration] = useState([]);
 
+  const [student, setStudent] = useState([]);
+
+  const [studentId, setStudentId] = useState([]);
   const [planId, setPlanId] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -42,17 +45,19 @@ export default function RegisterCreate({ match }) {
 
   useEffect(() => {
     async function loadRegistration() {
-      const formato = {
-        minimumFractionDigits: 2,
-        style: 'currency',
-        currency: 'BRL',
-      };
       const { data } = await api.get(`registrations/${idRegistration}`, {});
 
       setPlanId(data.plan.id);
-      setStartDate(new Date(data.start_date).setUTCHours(3));
-      setEndDate(format(new Date(data.end_date), 'dd/MM/yyyy'));
-      setPrice(Number(data.price).toLocaleString('pt-BR', formato));
+      setStudentId(data.student.id);
+
+      const studentSelected = {
+        id: data.student.id,
+        title: data.student.name,
+      };
+
+      setStudent(studentSelected);
+      // Because
+      setStartDate(addHours(parseISO(data.start_date), 3));
 
       setRegistration(data);
     }
@@ -77,7 +82,7 @@ export default function RegisterCreate({ match }) {
     }
 
     loadPlans();
-  }, [idRegistration]);
+  }, [idRegistration, studentId]);
 
   useEffect(() => {
     if (planId) {
@@ -92,6 +97,7 @@ export default function RegisterCreate({ match }) {
         setPrice(
           Number(planSelected.priceDuration).toLocaleString('pt-BR', formato)
         );
+
         if (startDate) {
           const newDate = addMonths(
             parseISO(format(new Date(startDate), 'yyyy-MM-dd')),
@@ -142,6 +148,11 @@ export default function RegisterCreate({ match }) {
     callback(await filterStudents(inputValue));
   };
 
+  const setSelectStudent = async optionStudent => {
+    setStudent(optionStudent);
+    setStudentId(optionStudent.id);
+  };
+
   return (
     <Container>
       <Form schema={schema} onSubmit={handleSubmit} initialData={registration}>
@@ -158,16 +169,16 @@ export default function RegisterCreate({ match }) {
             <label>Aluno</label>
 
             <ReactSelect
-              name="studentSelect"
+              name="student_id"
               placeholder="Selecione o Aluno"
               loadOptions={loadOptions}
               value={student}
-              set={setStudent}
+              set={setSelectStudent}
             />
 
             <Input
               name="student_id"
-              value={student}
+              value={studentId}
               style={{ display: 'none' }}
             />
           </FormDivLine>

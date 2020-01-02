@@ -40,6 +40,7 @@ export default function Register() {
       });
 
       setRegisters(data);
+      setRegisterChange(false);
     }
 
     loadRegister();

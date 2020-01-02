@@ -24,6 +24,7 @@ export default function Student() {
         params: { q: searchStudent },
       });
       setStudents(response.data);
+      setStudentChange(false);
     }
 
     loadStudent();

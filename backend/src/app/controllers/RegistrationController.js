@@ -36,7 +36,7 @@ class RegistrationController {
         {
           model: Student,
           as: 'student',
-          attributes: ['id'],
+          attributes: ['id', 'name'],
         },
         {
           model: Plan,
@@ -99,7 +99,7 @@ class RegistrationController {
 
     const planTxt = `${plan.title} : Plano de ${plan.duration} ${
       plan.duration > 1 ? 'meses' : 'mês'
-    } por ${planPrice}${plan.duration > 1 ? '/mês' : ''}`;
+      } por ${planPrice}${plan.duration > 1 ? '/mês' : ''}`;
 
     const endDate = format(end_date, 'dd/MM/yyyy', {
       locale: pt,
