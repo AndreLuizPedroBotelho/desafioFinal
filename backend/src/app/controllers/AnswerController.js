@@ -51,6 +51,7 @@ class AnswerController {
     const answerAt = format(answer_at, 'dd/MM/yyyy', {
       locale: pt,
     });
+
     await Queue.add(HelpOrderAnswerMail.key, {
       answerAt,
       studentEmail: helpOrder.student.email,

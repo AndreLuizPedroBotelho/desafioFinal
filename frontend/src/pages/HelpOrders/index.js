@@ -35,12 +35,13 @@ export default function HelpOrders() {
     setShow(true);
   }
 
-  async function handleSubmit(data) {
+  async function handleSubmit(data, { resetForm }) {
     try {
       await api.put(`answer/${idHelpOrder}`, data);
       toast.success('Resposta Salva');
       setShow(false);
       setHelpOrderChange(true);
+      resetForm();
     } catch (err) {
       toast.error('Erro ao salvar');
     }

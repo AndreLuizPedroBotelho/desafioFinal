@@ -16,7 +16,6 @@ export const Loading = styled(ActivityIndicator)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1;
 `;
 
 export const Background = styled.View`
@@ -32,7 +31,6 @@ export const Container = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1;
 `;
 
 export const List = styled.FlatList.attrs({

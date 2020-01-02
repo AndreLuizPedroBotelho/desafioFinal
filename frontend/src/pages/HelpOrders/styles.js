@@ -51,6 +51,7 @@ export const Table = styled.table`
 
   td.actions {
     display: flex;
+    height: 35px;
   }
 
   tr td:nth-child(3) {

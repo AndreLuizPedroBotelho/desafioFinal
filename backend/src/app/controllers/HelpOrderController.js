@@ -8,7 +8,7 @@ class HelpOrderController {
         answer_at: null,
       },
 
-      order: ['id'],
+      order: [['id', 'DESC']],
       include: [
         {
           model: Student,
