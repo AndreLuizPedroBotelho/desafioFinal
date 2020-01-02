@@ -9,7 +9,9 @@
     "dev:debug": "nodemon --inspect src/server.js",
     "queue": "nodemon src/queue.js",
     "seeds": "npx sequelize db:seed:all",
-    "migrations": "npx sequelize db:migrate"
+    "migrations": "npx sequelize db:migrate",
+    "build": "sucrase ./src -d ./dist --transforms imports",
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

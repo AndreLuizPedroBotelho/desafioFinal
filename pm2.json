@@ -1,0 +1,16 @@
+{
+  "apps": [
+    {
+      "name": "backend",
+      "script": "cd backend && yarn build && yarn start"
+    },
+    {
+      "name": "frontend",
+      "script": "cd frontend && yarn start"
+    },
+    {
+      "name": "mobile",
+      "script": "cd mobile && yarn start"
+    }
+  ]
+}

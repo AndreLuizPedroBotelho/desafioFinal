@@ -1,11 +1,12 @@
 {
   "name": "desafioFinal",
   "version": "1.0.0",
+  "description": "Desafio Final do GoStack",
+  "author": "André Luiz Pedro Botelho (andrepedrobotelho@gmail.com)",
   "main": "index.js",
   "repository": "https://github.com/AndreLuizPedroBotelho/desafioFinal.git",
   "license": "MIT",
   "scripts": {
-    "start-backend": "cd backend && yarn dev",
-    "start-frontend": "cd frontend && yarn start"
+    "start": "pm2 start pm2.json"
   }
 }
