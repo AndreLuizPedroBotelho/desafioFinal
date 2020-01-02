@@ -17,11 +17,20 @@ export const Left = styled.View`
   font-size: 14px;
   color:#444444;
   margin-left:10px;
+  font-weight:bold;
+`;
+
+export const Title = styled.Text`
+  color: #444444;
+  font-weight:bold;
+`;
+
+export const TitleDate = styled.Text`
+  color: #666666;
 `;
 
 export const Right = styled.View`
   font-size: 14px;
-  color:#666666;
   margin-right:10px;
 `;
 

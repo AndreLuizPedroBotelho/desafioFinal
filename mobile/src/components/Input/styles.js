@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  height: 46px;
   border-radius: 4px;
   width:100%;
   flex-direction: row;
@@ -15,4 +14,5 @@ export const TInput = styled.TextInput.attrs({
   font-size: 15px;
   color: #999999;
   border:1px solid #999999;
+
 `;

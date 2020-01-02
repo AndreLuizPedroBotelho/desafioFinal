@@ -3,35 +3,38 @@ import AsyncStorage from '@react-native-community/async-storage';
 import logo from '~/assets/logo-header.png';
 import { Image, Alert, Text } from 'react-native';
 
-import { ButtonClick, Container, Background, List } from './styles';
+import { SubmitButton, Form, FormInput, Container, Background } from './styles';
 
 import api from '~/services/api';
 
-export default function HelpOrderQuestion() {
+export default function HelpOrderQuestion({ navigation }) {
+  const [question, setQuestion] = useState();
   const [student, setStudent] = useState();
-  const [checkinsChange, setCheckinsChange] = useState();
 
   useEffect(() => {
     AsyncStorage.getItem('student').then(student => {
       setStudent(student)
-      setCheckinsChange(true)
     });
   }, []);
 
-
-
-  async function handleClick() {
+  async function handleSubmit() {
     try {
-      await api.post(`/students/${student}/checkins`);
+      await api.post(`/students/${student}/help-orders`, {
+        question
+      });
 
       Alert.alert(
         'Confirmação!',
-        'Checkin realizado com sucesso!'
+        'Pedido de Auxílio cadastrado com sucesso!'
       );
 
-      setCheckinsChange(true);
+      navigation.navigate('HelpOrderList', { change: true })
+
     } catch (err) {
-      console.log(err)
+      Alert.alert(
+        '',
+        'Não foi possível cadastrar o Pedido de Auxílio!'
+      );
     }
   }
 
@@ -39,11 +42,23 @@ export default function HelpOrderQuestion() {
   return (
     <Background>
       <Container >
-        <ButtonClick onPress={handleClick}>
-          Novo pedido de auxílio
-        </ButtonClick>
-        <Text>HelpOrderQuestion</Text>
+        <Form >
+          <FormInput
+            textAlignVertical='top'
+            multiline={true}
+            numberOfLines={12}
+            autoCorrect={false}
+            autoCapitalize="none"
+            placeholder="Inclua seu pedido de auxílio"
+            returnKeyType="send"
+            value={question}
+            onChangeText={setQuestion}
+          />
 
+          <SubmitButton onPress={handleSubmit}>
+            Enviar pedido
+          </SubmitButton>
+        </Form>
       </Container>
     </Background>
   );

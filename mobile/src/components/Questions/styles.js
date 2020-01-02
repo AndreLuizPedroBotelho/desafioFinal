@@ -2,21 +2,14 @@ import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
   background: #fff;
+  height: 120px;
   margin-bottom: 15px;
   border-radius: 4px;
-  width: 90%;
+  width: 100%;
   margin-right:20px;
   display: flex;
-  height: 300px;
   flex-direction: column;
   border:1px solid #fff;
-  margin-top: 8%;
-  margin-left: 5%;
-  margin-right: 5%;
-`;
-
-export const Content = styled.TouchableOpacity`
-  margin:20px;
 `;
 
 export const Wraper = styled.View`
@@ -24,37 +17,44 @@ export const Wraper = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
-  &.wrapperText{
-    margin-top: 15px;
-  }
-
 `;
 
-export const Background = styled.View`
-  background-color:#f5f5f5;
-  height:100%;
+export const Question = styled.View`
+  margin-left:10px;
+  margin-top:10px;
+  line-height:18px;
+  text-align: left;
+`;
+
+export const QuestionText = styled.Text`
+  line-height:18px;
+  text-align: left;
+  width:100%;
+  color: #666666;
 `;
 
 export const Left = styled.View`
   font-size: 14px;
+  margin-left:30px;
 `;
 
 export const Title = styled.Text`
-  color: #444444;
-  font-weight:bold;
-  margin-top: 8%;
+  color: ${props => (props.answer ? '#42CB59' : '#999999')};
 `;
 
-export const TextDescription = styled.Text`
-  color: #666666;
-`;
-
-export const TextDate = styled.Text`
+export const TitleDate = styled.Text`
   color: #666666;
 `;
 
 export const Right = styled.View`
   font-size: 14px;
   color: #666666;
+  margin-right: 10px;
 `;
+
+
+
+
+
+
+

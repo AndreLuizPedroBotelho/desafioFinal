@@ -1,49 +1,68 @@
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import logo from '~/assets/logo-header.png';
-import { Image, Alert, Text } from 'react-native';
+import { Image } from 'react-native';
 
-import { ButtonClick, Container, Background, List } from './styles';
+import { ButtonClick, Container, Loading, Background, List } from './styles';
 
 import api from '~/services/api';
+import Questions from '~/components/Questions';
 
-export default function HelpOrderList() {
+export default function HelpOrderList({ navigation }) {
   const [student, setStudent] = useState();
-  const [checkinsChange, setCheckinsChange] = useState();
+
+  const change = navigation.getParam('change');
+  const [helpOrderListChange, setHelpOrderListChange] = useState();
+  const [helpOrderList, setHelpOrderList] = useState();
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     AsyncStorage.getItem('student').then(student => {
       setStudent(student)
-      setCheckinsChange(true)
+      setHelpOrderListChange(true)
     });
   }, []);
 
-  async function handleClick() {
-    try {
-      await api.post(`/students/${student}/checkins`);
-
-      Alert.alert(
-        'Confirmação!',
-        'Checkin realizado com sucesso!'
-      );
-
-      setCheckinsChange(true);
-    } catch (err) {
-      console.log(err)
+  useEffect(() => {
+    async function loadHelpOrderAnswer() {
+      if (student) {
+        const { data } = await api.get(`/students/${student}/help-orders`);
+        setHelpOrderList(data);
+        setHelpOrderListChange(false);
+        setLoading(false);
+      }
     }
-  }
+    loadHelpOrderAnswer()
+  }, [helpOrderListChange, change]);
 
+  function handlePress(data) {
+    navigation.navigate('HelpOrderAnswer', { data })
+  }
 
   return (
     <Background>
       <Container >
-        <ButtonClick onPress={handleClick}>
+        <ButtonClick onPress={() => navigation.navigate('HelpOrderQuestion')}>
           Novo pedido de auxílio
         </ButtonClick>
-        <Text>HelpOrderList</Text>
 
+        {loading ? (
+          <Loading size="large" color="#EE4E62" />
+        ) : (
+            <List
+              loading={loading}
+              vertical
+              inverted
+              data={helpOrderList}
+              keyExtrator={item => String(item.id)}
+              renderItem={({ item }) => (
+                <Questions data={item} handlePress={handlePress} />
+              )}
+            />
+          )}
       </Container>
-    </Background>
+    </Background >
   );
 }
 

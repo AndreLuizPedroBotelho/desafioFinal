@@ -3,12 +3,11 @@ import { parseISO, formatRelative } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { Text, View } from 'react-native';
 
-import { Container, Left, Right } from './styles';
+import { Container, Title, TitleDate, Left, Right } from './styles';
 
 export default function Checkins({ data, index }) {
-  console.log(data)
   const dateParsed = useMemo(() => {
-    const dateFormated = formatRelative(parseISO(data.createdAt), new Date(), {
+    const dateFormated = formatRelative(parseISO(data.updatedAt), new Date(), {
       locale: pt,
       addSuffix: true,
     });
@@ -19,14 +18,14 @@ export default function Checkins({ data, index }) {
   return (
     <Container >
       <Left>
-        <Text>
-          Check-in #{index}
-        </Text>
+        <Title>
+          Check-in #{String(index)}
+        </Title>
       </Left>
       <Right>
-        <Text>
+        <TitleDate>
           {dateParsed}
-        </Text>
+        </TitleDate>
       </Right>
     </Container >
   );

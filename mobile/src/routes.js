@@ -38,8 +38,8 @@ export default () =>
             },
             HelpOrder: {
               screen: createStackNavigator({
-                HelpOrderAnswer,
                 HelpOrderList,
+                HelpOrderAnswer,
                 HelpOrderQuestion,
               },
                 {

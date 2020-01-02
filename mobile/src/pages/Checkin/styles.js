@@ -1,22 +1,25 @@
 import styled from 'styled-components/native';
+import { Platform, ActivityIndicator } from 'react-native';
 
 import Button from '~/components/Button';
 
 export const ButtonClick = styled(Button)`
   margin-top: 20px;
-  margin-left: 5%;
-  margin-right: 5%;
-
   width: 90%;
+`;
+
+export const Loading = styled(ActivityIndicator)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 `;
 
 export const List = styled.FlatList.attrs({
   showsVerticalScrollIndicator: true,
 })`
     margin-top: 5%;
-    margin-left: 5%;
-    margin-right: 5%;
-
     width: 90%;
 `;
 
@@ -25,9 +28,12 @@ export const Background = styled.View`
   height:100%;
 `;
 
-export const Container = styled.View`
-  display: flex;
+export const Container = styled.KeyboardAvoidingView.attrs({
+  enabled: Platform.Os === 'ios',
+  behavior: 'padding',
+})`
+  flex: 1;
   align-items: center;
-  justify-content: center;
+  padding: 0 20px;
 `;
 

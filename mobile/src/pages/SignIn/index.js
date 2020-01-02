@@ -13,14 +13,14 @@ import {
 } from './styles';
 
 export default function SignIn({ navigation }) {
-
   const [idStudent, setIdStudent] = useState('');
+  const [loading, setLoading] = useState(false);
 
 
   async function handleSubmit() {
     try {
       const { data } = await api.get(`/student/${idStudent}`);
-
+      setLoading(true);
       await AsyncStorage.setItem('student', String(data.id));
 
       navigation.navigate('Checkin')
@@ -35,7 +35,6 @@ export default function SignIn({ navigation }) {
       <Image source={logo} />
       <Form>
         <FormInput
-          icon="mail-outline"
           keyboardType="number-pad"
           autoCorrect={false}
           autoCapitalize="none"
@@ -45,7 +44,7 @@ export default function SignIn({ navigation }) {
           onChangeText={setIdStudent}
         />
 
-        <SubmitButton onPress={handleSubmit}>
+        <SubmitButton loading={loading} onPress={handleSubmit}>
           Entrar no sistema
         </SubmitButton>
       </Form>

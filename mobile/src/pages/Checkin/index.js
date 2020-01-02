@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import logo from '~/assets/logo-header.png';
 import { Image, Alert } from 'react-native';
 
-import { ButtonClick, Container, Background, List } from './styles';
+import { ButtonClick, Container, Loading, Background, List } from './styles';
 
 import api from '~/services/api';
 
@@ -13,6 +13,7 @@ export default function Checkin() {
   const [student, setStudent] = useState();
   const [checkins, setCheckins] = useState([]);
   const [checkinsChange, setCheckinsChange] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     AsyncStorage.getItem('student').then(student => {
@@ -27,6 +28,8 @@ export default function Checkin() {
         const { data } = await api.get(`/students/${student}/checkins`);
         setCheckins(data);
         setCheckinsChange(false);
+        setLoading(false);
+
       }
     }
     loadCheckin()
@@ -46,11 +49,10 @@ export default function Checkin() {
     } catch (err) {
       Alert.alert(
         '',
-        'Não é possivel fazer check-in no momento!'
+        'Não é possivel fazer check-in, limite máximo excedido!'
       );
     }
   }
-
 
   return (
     <Background>
@@ -59,15 +61,18 @@ export default function Checkin() {
           Novo check-in
         </ButtonClick>
 
-        <List
-          vertical
-          inverted
-          data={checkins}
-          keyExtrator={item => String(item.id)}
-          renderItem={({ item, index }) => (
-            <Checkins index={index} data={item} />
-          )}
-        />
+        {loading ? (
+          <Loading size="large" color="#EE4E62" />
+        ) : (
+            <List
+              vertical
+              inverted
+              data={checkins}
+              keyExtrator={item => item.id.toString()}
+              renderItem={({ item, index }) => (
+                <Checkins index={index.toString()} data={item} />
+              )}
+            />)}
 
       </Container>
     </Background>

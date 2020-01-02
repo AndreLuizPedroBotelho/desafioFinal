@@ -1,46 +1,65 @@
-import React, { useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
+import React, { useMemo, useState } from 'react';
 import logo from '~/assets/logo-header.png';
-import { Image, Alert, Text } from 'react-native';
+import { Image, View, Text } from 'react-native';
+import { parseISO, formatRelative } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
-import { ButtonClick, Container, Background, List } from './styles';
+import { Container, Left, TextDate, Title, Right, Content, Background, TextDescription, Wraper } from './styles';
 
-import api from '~/services/api';
 
-export default function HelpOrderAnswer() {
-  const [student, setStudent] = useState();
-  const [checkinsChange, setCheckinsChange] = useState();
+export default function HelpOrderAnswer({ navigation }) {
 
-  useEffect(() => {
-    AsyncStorage.getItem('student').then(student => {
-      setStudent(student)
-      setCheckinsChange(true)
+  const data = navigation.getParam('data');
+
+  const dateParsed = useMemo(() => {
+    const dateShow = data.answer_at ? data.answer_at : data.updatedAt;
+    const dateFormated = formatRelative(parseISO(dateShow), new Date(), {
+      locale: pt,
+      addSuffix: true,
     });
-  }, []);
 
-  async function handleClick() {
-    try {
-      await api.post(`/students/${student}/checkins`);
-
-      Alert.alert(
-        'Confirmação!',
-        'Checkin realizado com sucesso!'
-      );
-
-      setCheckinsChange(true);
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
+    return dateFormated.charAt(0).toUpperCase() + dateFormated.slice(1)
+  }, [data.date]);
 
   return (
     <Background>
-      <Container >
-        <ButtonClick onPress={handleClick}>
-          Novo pedido de auxílio
-        </ButtonClick>
-        <Text>HelpOrderAnswer</Text>
+      <Container>
+        <Content>
+
+          <Wraper>
+            <Left >
+              <Title answer={data.answer_at}>
+                PERGUNTA
+              </Title>
+            </Left>
+            <Right>
+              <TextDate>
+                {dateParsed}
+              </TextDate>
+            </Right>
+          </Wraper>
+          <View>
+            <TextDescription>
+              {data.question}
+            </TextDescription>
+          </View>
+          <Wraper className="wrapperText">
+            <Left >
+              <Title answer={data.answer_at}>
+                RESPOSTA
+              </Title>
+            </Left>
+            <Right>
+              <TextDate>
+              </TextDate>
+            </Right>
+          </Wraper>
+          <View>
+            <TextDescription>
+              {data.answer}
+            </TextDescription>
+          </View>
+        </Content>
       </Container>
     </Background>
   );
