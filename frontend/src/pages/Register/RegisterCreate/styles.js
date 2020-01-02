@@ -4,6 +4,18 @@ import { lighten } from 'polished';
 
 export const Container = styled.div`
   margin: 0% 15%;
+  margin-top: 20px;
+  @media screen and (max-width: 1020px) and (min-width: 769px) {
+    width: 90vh;
+  }
+
+  @media only screen and (width: 768px) {
+    width: 75vh;
+  }
+
+  @media screen and (max-width: 767px) {
+    width: 110vh;
+  }
 `;
 
 export const ContainerTitle = styled.div`

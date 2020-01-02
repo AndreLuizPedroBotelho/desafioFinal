@@ -5,6 +5,13 @@ export const Container = styled.div`
   background: #fff;
   padding: 0 30px;
   border-bottom: 1px solid #eee;
+  @media screen and (max-width: 1020px) {
+    width: 100vh;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 130vh;
+  }
 `;
 
 export const Content = styled.div`
@@ -36,17 +43,18 @@ export const LinkHref = styled(Link)`
   font-size:15px
   color: ${props => props.active && props.active};
   margin-right: 10px;
+
 `;
 
 export const Profile = styled.div`
   display: flex;
-  margin-left: 20px;
   padding-left: 20px;
   border-left: 1px solid #eee;
+  margin-left: 20px;
 
   div {
     text-align: right;
-    margin-right: 10px;
+    margin-right: 20px;
 
     strong {
       display: block;
