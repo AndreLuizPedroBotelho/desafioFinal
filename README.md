@@ -59,5 +59,5 @@ $ yarn migrations && yarn seeds
 
 # Observações
 
-### **O projeto mobile so foi desenvolvido para android**
+### **O projeto mobile só foi desenvolvido para android**
 ### **Se for utilizar npm, tem que alterar os arquivos pm2.json e package.json**
