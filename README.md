@@ -51,7 +51,6 @@ $ yarn start-android
 
 ```
 
-
 ## 8. Inicializar o projeto 
 ```
 $ yarn start
