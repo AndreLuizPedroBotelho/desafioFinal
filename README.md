@@ -9,7 +9,7 @@
 
 # Pré-requisitos
                 
-1. Node ( <https://nodejs.org/en/download/> ) 
+1. Node
 2. Postgres
 3. Redis
 4. Ambiente react native configurado ( <https://docs.rocketseat.dev/ambiente-react-native/introducao> ) 
