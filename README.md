@@ -2,7 +2,7 @@
 
 <h1 align="center">
 <br>
-<a name="top" ><img src="./frontend/src/assets/logo.svg"></a>
+<a name="top" href="https://github.com/AndreLuizPedroBotelho/desafioFinal.git "><img src="./frontend/src/assets/logo.svg"></a>
 <br>
 <br>
 </h1>
