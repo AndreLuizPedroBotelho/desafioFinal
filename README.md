@@ -59,4 +59,4 @@ $ yarn migrations && yarn seeds
 
 # Observações
 
-### O projeto mobile so foi feito para android
+### O projeto mobile so foi desenvolvido para android
