@@ -45,12 +45,19 @@ $ cp backend/.env.example backend/.env
 $ yarn build
 
 ```
-## 7. Inicializar o projeto 
+## 7. Com o aparelho android conectado, executar o comando   
+```
+$ yarn start-android
+
+```
+
+
+## 8. Inicializar o projeto 
 ```
 $ yarn start
 
 ```
-## 8. Executar migrations e seeds 
+## 9. Executar migrations e seeds 
 
 ```
 $ yarn migrations && yarn seeds  
