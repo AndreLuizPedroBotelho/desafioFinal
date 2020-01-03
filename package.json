@@ -7,6 +7,9 @@
   "repository": "https://github.com/AndreLuizPedroBotelho/desafioFinal.git",
   "license": "MIT",
   "scripts": {
-    "start": "pm2 start pm2.json"
+    "start": "pm2 start pm2.json",
+    "build": "cd backend && yarn install && cd ../frontend && yarn install && cd ../mobile && yarn install",
+    "seeds": "cd backend && yarn seeds",
+    "migrations": "cd backend && yarn migrations"
   }
 }
