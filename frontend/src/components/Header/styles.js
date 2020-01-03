@@ -5,8 +5,8 @@ export const Container = styled.div`
   background: #fff;
   padding: 0 30px;
   border-bottom: 1px solid #eee;
-  @media screen and (max-width: 1020px) {
-    width: 100vh;
+  @media screen and (max-width: 768px) {
+    width: 115vh;
   }
 
   @media screen and (max-width: 500px) {
@@ -40,10 +40,9 @@ export const Content = styled.div`
 
 export const LinkHref = styled(Link)`
   font-weight: bold;
-  font-size:15px
+  font-size:15px;
   color: ${props => props.active && props.active};
   margin-right: 10px;
-
 `;
 
 export const Profile = styled.div`

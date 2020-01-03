@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import SessionController from './app/controllers/SessionController';
+import SessionStudentController from './app/controllers/SessionStudentController';
 import StudentController from './app/controllers/StudentController';
 import PlanController from './app/controllers/PlanController';
 import RegistrationController from './app/controllers/RegistrationController';
@@ -22,7 +23,7 @@ routes.post('/session', SessionController.store);
 /**
  * Student
  */
-routes.get('/student/:id', StudentController.show);
+routes.post('/sessionStudent', SessionStudentController.store);
 
 /**
  * StudentHelpOrders
@@ -59,7 +60,7 @@ routes.post('/student', StudentController.store);
 routes.put('/student/:id', StudentController.update);
 routes.get('/student', StudentController.index);
 routes.delete('/student/:id', StudentController.delete);
-
+routes.get('/student/:id', StudentController.show);
 /**
  * HelpOrders
  */

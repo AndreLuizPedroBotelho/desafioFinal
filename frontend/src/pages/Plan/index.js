@@ -76,7 +76,7 @@ export default function Plan() {
             <th>TÍTULO</th>
             <th>DURAÇÃO</th>
             <th>VALOR p/ MÊS</th>
-            <th width="20" />
+            <th className="actions"/>
           </tr>
         </thead>
         <tbody>

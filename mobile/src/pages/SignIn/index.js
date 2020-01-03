@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Alert } from 'react-native';
 
 import logo from '~/assets/logo.png';
 import api from '~/services/api';
@@ -19,13 +20,19 @@ export default function SignIn({ navigation }) {
 
   async function handleSubmit() {
     try {
-      const { data } = await api.get(`/student/${idStudent}`);
+      const { data } = await api.post('/sessionStudent/', {
+        id: idStudent
+      });
+
       setLoading(true);
       await AsyncStorage.setItem('student', String(data.id));
 
       navigation.navigate('Checkin')
     } catch (err) {
-      console.log(err)
+      Alert.alert(
+        'Falha na autenticação!',
+        'Verifique se o ID de cadastro esta correto, se o erro persister entre em contato com a equipe gympoint!'
+      );
     }
 
   }

@@ -72,7 +72,7 @@ export default function Student() {
             <th>NOME</th>
             <th>E-MAIL</th>
             <th>IDADE</th>
-            <th width="20" />
+            <th className="actions" />
           </tr>
         </thead>
         <tbody>

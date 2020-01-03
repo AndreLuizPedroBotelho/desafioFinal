@@ -4,17 +4,22 @@ import { lighten } from 'polished';
 export const Container = styled.div`
   margin: 0% 20%;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 500px) {
     width: 100vh;
   }
 
   @media only screen and (width: 768px) {
-    width: 75vh;
+    width: 70vh;
   }
 
   @media screen and (max-width: 1024px) and (min-width: 769px) {
     width: 50vh;
   }
+
+  @media screen and (max-width: 1024px) and (min-width: 769px) {
+    width: 50vh;
+  }
+
 `;
 
 export const ContainerTitle = styled.div`
@@ -37,25 +42,46 @@ export const Table = styled.table`
   background-color: #fff;
   padding: 17px 25px;
   margin-top: 20px;
-  th,
-  td {
-    padding: 8px;
+
+  thead {
+    flex: 0 0 auto;
+    width: calc(100% - 0.9em);
+  }
+
+  tbody {
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: auto;
+    max-height: 60vh;
+    margin-top: 10px;
+  }
+
+  .actions {
+    width: 6rem;
+  }
+
+  tbody td:first-child ,thead th:first-child{
     text-align: left;
+  }
+
+  tbody td ,thead th{
+    text-align: center;
+    word-wrap: break-word;
+  }
+
+  tbody tr {
+    width: 100%;
+    padding: 13px 0;
     border-bottom: 1px solid #ddd;
   }
 
-  tr:last-child td,
-  tr:first-child th {
-    border: 0;
+  tbody tr:last-child {
+    border-bottom: 0;
   }
 
-  td.actions {
-    display: flex;
-    height: 35px;
-  }
-
-  tr td:nth-child(3) {
-    padding-left: 17px;
+  thead,  tbody tr {
+    display: table;
+    table-layout: fixed;
   }
 `;
 
