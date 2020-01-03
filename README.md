@@ -14,7 +14,7 @@
 3. Redis
 4. Ambiente react native configurado ( <https://docs.rocketseat.dev/ambiente-react-native/introducao> ) 
 5. Conta no mailtrap ( <https://mailtrap.io/>)
-6. yarn ou npm ( **Se for utilizar npm, tem que alterar os arquivos pm2.json e package.json**)   
+6. yarn ou npm 
 ----
                 
 # Intruções
@@ -59,4 +59,5 @@ $ yarn migrations && yarn seeds
 
 # Observações
 
-### O projeto mobile so foi desenvolvido para android
+### **O projeto mobile so foi desenvolvido para android**
+### **Se for utilizar npm, tem que alterar os arquivos pm2.json e package.json**
