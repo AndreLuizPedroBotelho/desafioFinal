@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import logo from '~/assets/logo-header.png';
-import { Image } from 'react-native';
+import { Image, Alert, Text } from 'react-native';
 
 import { ButtonClick, Container, Loading, Background, List } from './styles';
+import { NavigationEvents } from 'react-navigation'
 
 import api from '~/services/api';
 import Questions from '~/components/Questions';
@@ -11,7 +12,6 @@ import Questions from '~/components/Questions';
 export default function HelpOrderList({ navigation }) {
   const [student, setStudent] = useState();
 
-  const change = navigation.getParam('change');
   const [helpOrderListChange, setHelpOrderListChange] = useState();
   const [helpOrderList, setHelpOrderList] = useState();
 
@@ -19,8 +19,8 @@ export default function HelpOrderList({ navigation }) {
 
   useEffect(() => {
     AsyncStorage.getItem('student').then(student => {
-      setStudent(student)
-      setHelpOrderListChange(true)
+      setStudent(student);
+      setHelpOrderListChange(true);
     });
   }, []);
 
@@ -34,15 +34,23 @@ export default function HelpOrderList({ navigation }) {
       }
     }
     loadHelpOrderAnswer()
-  }, [helpOrderListChange, change]);
+  }, [helpOrderListChange]);
 
   function handlePress(data) {
-    navigation.navigate('HelpOrderAnswer', { data })
+    navigation.navigate('HelpOrderAnswer', { data });
+  }
+
+  function handleChange(data) {
+    setLoading(true);
+    setHelpOrderListChange(true);
   }
 
   return (
     <Background>
       <Container >
+        <NavigationEvents
+          onDidFocus={payload => handleChange()}
+        />
         <ButtonClick onPress={() => navigation.navigate('HelpOrderQuestion')}>
           Novo pedido de auxílio
         </ButtonClick>

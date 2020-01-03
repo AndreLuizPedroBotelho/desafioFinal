@@ -28,7 +28,7 @@ export default function HelpOrderQuestion({ navigation }) {
         'Pedido de Auxílio cadastrado com sucesso!'
       );
 
-      navigation.navigate('HelpOrderList', { change: true })
+      navigation.navigate('HelpOrderList')
 
     } catch (err) {
       Alert.alert(
