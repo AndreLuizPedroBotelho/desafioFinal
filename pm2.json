@@ -11,6 +11,10 @@
     {
       "name": "mobile",
       "script": "cd mobile && yarn start"
+    },
+    {
+      "name": "job",
+      "script": "cd backend && yarn queue"
     }
   ]
 }

@@ -18,10 +18,11 @@
 ----
                 
 # Intruções
-## 1. Instalar pm2 globalmente
+## 1. Instalar pm2 globalmente e nodemon globalmente
 
 ```
 $ npm install pm2 -g 
+$ npm install nodemon -g 
 
 ```
 ## 2. Clonar repositório
