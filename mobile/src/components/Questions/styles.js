@@ -17,6 +17,7 @@ export const Wraper = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin: 10px;
 `;
 
 export const Question = styled.View`
@@ -35,11 +36,20 @@ export const QuestionText = styled.Text`
 
 export const Left = styled.View`
   font-size: 14px;
-  margin-left: 30px;
+  margin-left: 0px;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
 `;
 
 export const Title = styled.Text`
   color: ${props => (props.answer ? '#42CB59' : '#999999')};
+  margin-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const TitleDate = styled.Text`

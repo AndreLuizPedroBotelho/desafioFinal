@@ -25,7 +25,7 @@ export default function SignIn({ navigation }) {
     } catch (err) {
       Alert.alert(
         'Falha na autenticação!',
-        'Verifique se o ID de cadastro esta correto, se o erro persister entre em contato com a equipe gympoint!'
+        'Verifique se o ID de cadastro esta correto, se o erro persistir entre em contato com a equipe gympoint!'
       );
     }
   }

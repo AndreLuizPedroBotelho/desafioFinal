@@ -99,7 +99,7 @@ class RegistrationController {
 
     const planTxt = `${plan.title} : Plano de ${plan.duration} ${
       plan.duration > 1 ? 'meses' : 'mês'
-      } por ${planPrice}${plan.duration > 1 ? '/mês' : ''}`;
+    } por ${planPrice}${plan.duration > 1 ? '/mês' : ''}`;
 
     const endDate = format(end_date, 'dd/MM/yyyy', {
       locale: pt,
@@ -107,7 +107,7 @@ class RegistrationController {
 
     await Queue.add(RegistrationMail.key, {
       studentName: student.name,
-      studentId: student.id,
+      studentId: params.student_id,
       price: Number(price).toLocaleString('pt-BR', formatMoney),
       planTxt,
       endDate,

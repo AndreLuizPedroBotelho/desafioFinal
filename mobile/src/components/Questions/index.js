@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { parseISO, formatRelative } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
   Container,
@@ -24,11 +25,15 @@ export default function Questions({ data, handlePress }) {
 
     return dateFormated.charAt(0).toUpperCase() + dateFormated.slice(1);
   }, [data.answer_at, data.updatedAt]);
-
   return (
     <Container onPress={() => handlePress(data)}>
       <Wraper>
         <Left>
+          <Icon
+            name="check-circle"
+            size={20}
+            color={data.answer_at ? '#42cb59' : '#ddd'}
+          />
           <Title answer={data.answer_at}>
             {data.answer_at ? 'Respondido' : 'Sem resposta'}
           </Title>
