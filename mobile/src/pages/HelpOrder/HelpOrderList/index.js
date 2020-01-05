@@ -12,7 +12,7 @@ import Questions from '~/components/Questions';
 export default function HelpOrderList({ navigation }) {
   const [student, setStudent] = useState();
 
-  const [helpOrderListChange, setHelpOrderListChange] = useState();
+  const [helpOrderListChange, setHelpOrderListChange] = useState(true);
   const [helpOrderList, setHelpOrderList] = useState();
 
   const [loading, setLoading] = useState(true);
@@ -34,7 +34,7 @@ export default function HelpOrderList({ navigation }) {
       }
     }
     loadHelpOrderAnswer()
-  }, [helpOrderListChange]);
+  }, [helpOrderListChange, student]);
 
   function handlePress(data) {
     navigation.navigate('HelpOrderAnswer', { data });

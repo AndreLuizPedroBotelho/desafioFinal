@@ -22,9 +22,15 @@ import {
 } from './styles';
 
 const schema = Yup.object().shape({
-  student_id: Yup.number().required('O aluno é obrigatório'),
-  plan_id: Yup.number().required('O plano é obrigatório'),
-  start_date: Yup.string().required('A data de início é obrigatorio'),
+  student_id: Yup.number()
+    .typeError('O aluno é obrigatório')
+    .required(),
+  plan_id: Yup.number()
+    .typeError('O plano é obrigatório')
+    .required(),
+  start_date: Yup.string()
+    .typeError('A data de início é obrigatorio')
+    .required(),
 });
 
 export default function RegisterCreate({ match }) {
@@ -149,8 +155,10 @@ export default function RegisterCreate({ match }) {
   };
 
   const setSelectStudent = async optionStudent => {
-    setStudent(optionStudent);
-    setStudentId(optionStudent.id);
+    if (optionStudent) {
+      setStudent(optionStudent);
+      setStudentId(optionStudent.id);
+    }
   };
 
   return (

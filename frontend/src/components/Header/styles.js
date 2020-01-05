@@ -40,7 +40,7 @@ export const Content = styled.div`
 
 export const LinkHref = styled(Link)`
   font-weight: bold;
-  font-size:15px;
+  font-size: 15px;
   color: ${props => props.active && props.active};
   margin-right: 10px;
 `;
@@ -75,4 +75,5 @@ export const Button = styled.button`
   margin-top: 2px;
   font-size: 12px;
   color: #de3b3b;
+  float: right;
 `;
