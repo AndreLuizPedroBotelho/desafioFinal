@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -34,6 +35,9 @@ export default () =>
 
               navigationOptions: {
                 title: 'Check-ins',
+                tabBarIcon: ({ tintColor }) => (
+                  <Icon name="edit-location" size={20} color={tintColor} />
+                ),
               }
             },
             HelpOrder: {
@@ -49,7 +53,11 @@ export default () =>
               ),
               navigationOptions: {
                 title: 'Pedir ajuda',
+                tabBarIcon: ({ tintColor }) => (
+                  <Icon name="live-help" size={20} color={tintColor} />
+                ),
               },
+
             },
           },
           {
