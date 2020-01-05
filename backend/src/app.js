@@ -1,6 +1,7 @@
 import 'dotenv/config';
 
 import { Pool } from 'pg';
+import * as Sentry from '@sentry/node';
 
 import cors from 'cors';
 import express from 'express';
@@ -11,11 +12,14 @@ import 'express-async-errors';
 import routes from './routes';
 
 import './database';
+import sentryConfig from './config/sentry';
 
 class App {
   constructor() {
     this.server = express();
     this.database();
+    Sentry.init(sentryConfig);
+
     this.middlewares();
     this.routes();
     this.exceptionHandler();
@@ -23,11 +27,14 @@ class App {
 
   middlewares() {
     this.server.use(express.json());
+    this.server.use(Sentry.Handlers.requestHandler());
+
     this.server.use(cors({}));
   }
 
   routes() {
     this.server.use(routes);
+    this.server.use(Sentry.Handlers.errorHandler());
   }
 
   database() {
