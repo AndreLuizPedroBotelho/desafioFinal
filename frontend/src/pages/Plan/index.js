@@ -100,7 +100,7 @@ export default function Plan() {
                 </td>
               </tr>
             ))
-          ) : (<tr><td>Não existe nenhum plano</td></tr>)}
+          ) : (<tr><td className="notFound">Não existe nenhum plano</td></tr>)}
         </tbody>
       </Table>
     </Container>

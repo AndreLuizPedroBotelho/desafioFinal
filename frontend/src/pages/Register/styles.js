@@ -75,6 +75,10 @@ export const Table = styled.table`
     width: 6rem;
   }
 
+  .notFound{
+    color:red;
+  }
+  
   tbody td:first-child ,thead th:first-child{
     text-align: left;
   }

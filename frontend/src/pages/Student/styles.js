@@ -95,6 +95,10 @@ export const Table = styled.table`
     border-bottom: 0;
   }
 
+  .notFound{
+    color:red;
+  }
+  
   thead,  tbody tr {
     display: table;
     table-layout: fixed;

@@ -70,3 +70,4 @@ $ yarn migrations && yarn seeds
 #### Se for utilizar npm,  os arquivos pm2.json e package.json terão que ser alterados
 #### O comando `yarn start` pode demorar, com o comando `pm2 logs` é possivel ver o que esta acontecendo 
 #### O comando `yarn start` já vai criar o banco com o nome escolhido na variável de ambiente `DB_NAME` 
+#### Projeto feito em ambiente de linux

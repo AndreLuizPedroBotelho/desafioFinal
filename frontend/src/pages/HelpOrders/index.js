@@ -84,7 +84,7 @@ export default function HelpOrders() {
                 </td>
               </tr>
             ))
-          ) : (<tr><td>Não existe nenhum pedido de auxílio no momento</td></tr>)}
+          ) : (<tr><td className="notFound">Não existe nenhum pedido de auxílio no momento</td></tr>)}
         </tbody>
       </Table>
     </Container>

@@ -96,7 +96,7 @@ export default function Student() {
                 </td>
               </tr>
             ))
-          ) : (<tr><td>Não existe nenhum aluno no momento</td></tr>)}
+          ) : (<tr><td className="notFound">Não existe nenhum aluno no momento</td></tr>)}
         </tbody>
       </Table>
     </Container>

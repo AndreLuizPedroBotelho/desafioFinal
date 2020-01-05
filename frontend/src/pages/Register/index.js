@@ -104,7 +104,7 @@ export default function Register() {
                 </td>
               </tr>
             ))
-          ) : (<tr><td>Não existe nenhuma matrícula</td></tr>)}
+          ) : (<tr><td className="notFound">Não existe nenhuma matrícula</td></tr>)}
         </tbody>
       </Table>
     </Container>
