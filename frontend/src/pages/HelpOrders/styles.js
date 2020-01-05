@@ -19,7 +19,6 @@ export const Container = styled.div`
   @media screen and (max-width: 1024px) and (min-width: 769px) {
     width: 50vh;
   }
-
 `;
 
 export const ContainerTitle = styled.div`
@@ -60,15 +59,17 @@ export const Table = styled.table`
     width: 6rem;
   }
 
-  .notFound{
-    color:red;
+  .notFound {
+    color: red;
   }
-  
-  tbody td:first-child ,thead th:first-child{
+
+  tbody td:first-child,
+  thead th:first-child {
     text-align: left;
   }
 
-  tbody td ,thead th{
+  tbody td,
+  thead th {
     text-align: center;
     word-wrap: break-word;
   }
@@ -83,9 +84,14 @@ export const Table = styled.table`
     border-bottom: 0;
   }
 
-  thead,  tbody tr {
+  thead,
+  tbody tr {
     display: table;
     table-layout: fixed;
+  }
+
+  td {
+    color: #999;
   }
 `;
 

@@ -110,6 +110,10 @@ export const Table = styled.table`
   th {
     display: table-cell;
   }
+
+  td {
+    color: #999;
+  }
 `;
 
 export const LinkHref = styled(Link)`

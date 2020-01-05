@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Select } from '@rocketseat/unform';
+import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { format, parseISO, addMonths, addHours } from 'date-fns';
@@ -15,6 +15,7 @@ import ReactSelect from '~/components/ReactSelect';
 import {
   Container,
   Button,
+  SelectStudent,
   LinkHref,
   FormDiv,
   FormDivLine,
@@ -202,7 +203,7 @@ export default function RegisterCreate({ match }) {
           <FormDivLine width={100} divFather>
             <FormDivLine width={35}>
               <label>PLANO</label>
-              <Select
+              <SelectStudent
                 name="plan_id"
                 options={plans}
                 value={planId}

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { lighten } from 'polished';
+import { Select } from '@rocketseat/unform';
 
 export const Container = styled.div`
   margin: 0% 15%;
@@ -127,4 +128,10 @@ export const LinkHref = styled(Link)`
 
 export const Button = styled.button`
   color: ${props => (!props.light ? props.color : lighten(0.1, props.color))};
+`;
+
+export const SelectStudent = styled(Select)`
+  option {
+    font-size: 20px;
+  }
 `;
