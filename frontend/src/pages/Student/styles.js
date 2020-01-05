@@ -45,14 +45,7 @@ export const Wrapper = styled.div`
     margin-right: 10px;
   }
 
-  input {
-    box-shadow: 0px 6px 16px -4px rgba(99, 93, 99, 0.81);
-    border-top: 0px;
-    border-left: 0px;
-    text-align: left;
-    padding-left: 22px;
-    border-radius: 4px;
-  }
+
 `;
 
 export const Table = styled.table`
@@ -117,3 +110,33 @@ export const Button = styled.button`
   background: transparent;
   border: transparent;
 `;
+
+export const Search = styled.div`
+  display:flex;
+  flex-direction:row;
+  justify-content:'center';
+  align-items:center;
+  background-color:#fff;
+  border-radius: 4px;
+  box-shadow: 0px 6px 16px -4px rgba(99, 93, 99, 0.81);
+  padding-left: 22px;
+
+  svg{
+    padding: 10;
+    color:#999999!important;
+    margin-right:5px;
+  }
+
+  input{
+    display:flex;
+    padding: 10 10 10 0;
+    background-color:#fff;
+    border:0;
+    color:#999999;
+
+  }
+`;
+
+
+
+

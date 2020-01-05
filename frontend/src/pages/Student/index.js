@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import api from '~/services/api';
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdSearch } from 'react-icons/md';
 
 import {
   Container,
   Table,
+  Search,
   LinkHref,
   Button,
   ContainerTitle,
@@ -58,12 +59,15 @@ export default function Student() {
       <ContainerTitle>
         <span>Gerenciando alunos</span>
         <Wrapper>
-          <Link to="/student/save"><MdAdd size={20} color="#fff" />CADASTRAR</Link>
-          <input
-            placeholder="Buscar aluno"
-            value={searchStudent}
-            onChange={e => setSearchStudent(e.target.value)}
-          />
+          <Link to="/student/save"><MdAdd size={20} />CADASTRAR</Link>
+          <Search>
+            <MdSearch size={20} color="#fff" />
+            <input
+              placeholder="Buscar aluno"
+              value={searchStudent}
+              onChange={e => setSearchStudent(e.target.value)}
+            />
+          </Search>
         </Wrapper>
       </ContainerTitle>
 
