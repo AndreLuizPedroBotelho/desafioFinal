@@ -76,25 +76,27 @@ export default function Student() {
           </tr>
         </thead>
         <tbody>
-          {students.map(student => (
-            <tr key={student.id}>
-              <td>{student.name}</td>
-              <td>{student.email}</td>
-              <td>{student.age}</td>
-              <td className="actions">
-                <LinkHref
-                  to={`/student/save/${student.id}`}
-                  light="true"
-                  color="blue"
-                >
-                  editar
+          {students.length > 0 ? (
+            students.map(student => (
+              <tr key={student.id}>
+                <td>{student.name}</td>
+                <td>{student.email}</td>
+                <td>{student.age}</td>
+                <td className="actions">
+                  <LinkHref
+                    to={`/student/save/${student.id}`}
+                    light="true"
+                    color="blue"
+                  >
+                    editar
                 </LinkHref>
-                <Button color="red" onClick={() => handleDelete(student)}>
-                  apagar
+                  <Button color="red" onClick={() => handleDelete(student)}>
+                    apagar
                 </Button>
-              </td>
-            </tr>
-          ))}
+                </td>
+              </tr>
+            ))
+          ) : (<tr><td>Não existe nenhum aluno no momento</td></tr>)}
         </tbody>
       </Table>
     </Container>

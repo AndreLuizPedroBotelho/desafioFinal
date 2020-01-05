@@ -76,29 +76,31 @@ export default function Plan() {
             <th>TÍTULO</th>
             <th>DURAÇÃO</th>
             <th>VALOR p/ MÊS</th>
-            <th className="actions"/>
+            <th className="actions" />
           </tr>
         </thead>
         <tbody>
-          {plans.map(plan => (
-            <tr key={plan.id}>
-              <td>{plan.title}</td>
-              <td>{plan.duration}</td>
-              <td>{plan.price}</td>
-              <td className="actions">
-                <LinkHref
-                  to={`/plan/save/${plan.id}`}
-                  light="true"
-                  color="blue"
-                >
-                  editar
+          {plans.length > 0 ? (
+            plans.map(plan => (
+              <tr key={plan.id}>
+                <td>{plan.title}</td>
+                <td>{plan.duration}</td>
+                <td>{plan.price}</td>
+                <td className="actions">
+                  <LinkHref
+                    to={`/plan/save/${plan.id}`}
+                    light="true"
+                    color="blue"
+                  >
+                    editar
                 </LinkHref>
-                <Button color="red" onClick={() => handleDelete(plan)}>
-                  apagar
+                  <Button color="red" onClick={() => handleDelete(plan)}>
+                    apagar
                 </Button>
-              </td>
-            </tr>
-          ))}
+                </td>
+              </tr>
+            ))
+          ) : (<tr><td>Não existe nenhum plano</td></tr>)}
         </tbody>
       </Table>
     </Container>

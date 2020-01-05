@@ -82,27 +82,29 @@ export default function Register() {
           </tr>
         </thead>
         <tbody>
-          {registers.map(register => (
-            <tr key={register.id}>
-              <td>{register.student.name}</td>
-              <td>{register.plan.title}</td>
-              <td>{register.start_date}</td>
-              <td>{register.end_date}</td>
-              <td>{register.active}</td>
-              <td className="actions">
-                <LinkHref
-                  to={`/register/save/${register.id}`}
-                  light="true"
-                  color="blue"
-                >
-                  editar
+          {registers.length > 0 ? (
+            registers.map(register => (
+              <tr key={register.id}>
+                <td>{register.student.name}</td>
+                <td>{register.plan.title}</td>
+                <td>{register.start_date}</td>
+                <td>{register.end_date}</td>
+                <td>{register.active}</td>
+                <td className="actions">
+                  <LinkHref
+                    to={`/register/save/${register.id}`}
+                    light="true"
+                    color="blue"
+                  >
+                    editar
                 </LinkHref>
-                <Button color="red" onClick={() => handleDelete(register)}>
-                  apagar
+                  <Button color="red" onClick={() => handleDelete(register)}>
+                    apagar
                 </Button>
-              </td>
-            </tr>
-          ))}
+                </td>
+              </tr>
+            ))
+          ) : (<tr><td>Não existe nenhuma matrícula</td></tr>)}
         </tbody>
       </Table>
     </Container>

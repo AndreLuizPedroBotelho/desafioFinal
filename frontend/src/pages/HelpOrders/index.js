@@ -69,20 +69,22 @@ export default function HelpOrders() {
         </thead>
 
         <tbody>
-          {helpOrders.map(helpOrder => (
-            <tr key={helpOrder.id}>
-              <td>{helpOrder.student.name}</td>
-              <td className="actions">
-                <Button
-                  light="true"
-                  color="blue"
-                  onClick={() => handleAnswer(helpOrder)}
-                >
-                  responder
+          {helpOrders.length > 0 ? (
+            helpOrders.map(helpOrder => (
+              <tr key={helpOrder.id}>
+                <td>{helpOrder.student.name}</td>
+                <td className="actions">
+                  <Button
+                    light="true"
+                    color="blue"
+                    onClick={() => handleAnswer(helpOrder)}
+                  >
+                    responder
                 </Button>
-              </td>
-            </tr>
-          ))}
+                </td>
+              </tr>
+            ))
+          ) : (<tr><td>Não existe nenhum pedido de auxílio no momento</td></tr>)}
         </tbody>
       </Table>
     </Container>
