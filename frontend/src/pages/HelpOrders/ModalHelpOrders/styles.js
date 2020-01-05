@@ -6,7 +6,9 @@ export const Container = styled.div`
     color: #444444;
   }
 
-  pre {
+  p {
+    white-space: pre-wrap;
+    overflow: hidden;
     font-size: 16px;
     color: #666666;
     margin: 10px 0;

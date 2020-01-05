@@ -15,7 +15,7 @@ export default function ModalHelpOrders({
     <Modal title="" show={show} setShow={setShow}>
       <Container>
         <strong>PERGUNTA DO ALUNO</strong>
-        <pre>{question}</pre>
+        <p>{question}</p>
         <strong>SUA RESPOSTA</strong>
         <Form onSubmit={handleSubmit} schema={schema}>
           <Input multiline name="answer" />

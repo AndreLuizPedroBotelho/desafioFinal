@@ -18,7 +18,7 @@ export default function Checkins({ data, index }) {
   return (
     <Container>
       <Left>
-        <Title>Check-in #{String(index)}</Title>
+        <Title>Check-in #{String(index + 1)}</Title>
       </Left>
       <Right>
         <TitleDate>{dateParsed}</TitleDate>

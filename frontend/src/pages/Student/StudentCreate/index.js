@@ -54,7 +54,7 @@ export default function StudentCreate({ match }) {
       const { data } = await api.get(`student/${idStudent}`, {});
       setStudent(data);
 
-      const heightChange = String(data.height).replace('.', ',');
+      const heightChange = String(data.height.toFixed(2)).replace('.', ',');
 
       setWeight(data.weight);
       setAge(data.age);
@@ -104,7 +104,7 @@ export default function StudentCreate({ match }) {
         <FormDiv>
           <FormDivLine>
             <label>NOME COMPLETO</label>
-            <Input name="name" />
+            <Input name="name" maxLength="255" />
           </FormDivLine>
 
           <FormDivLine>

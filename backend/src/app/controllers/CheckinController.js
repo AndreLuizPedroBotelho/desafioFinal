@@ -46,7 +46,7 @@ class CheckinController {
       },
     });
 
-    if (checkCount > 5) {
+    if (checkCount >= 5) {
       return res.status(400).json({ error: 'Maximum checkin exceeded' });
     }
 

@@ -61,7 +61,7 @@ export default function Checkin() {
             data={checkins}
             keyExtrator={item => item.id.toString()}
             renderItem={({ item, index }) => (
-              <Checkins index={index.toString()} data={item} />
+              <Checkins index={index} data={item} />
             )}
           />
         )}
