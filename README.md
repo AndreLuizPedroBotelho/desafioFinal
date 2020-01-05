@@ -15,6 +15,8 @@
 4. Ambiente react native configurado ( <https://docs.rocketseat.dev/ambiente-react-native/introducao> ) 
 5. Conta no mailtrap ( <https://mailtrap.io/>)
 6. yarn ou npm 
+7. Ambiente Linux (projeto desenvolvido no Debian)
+8. Celular ou emulador Android (O projeto mobile foi desenvolvido APENAS para este sistema)
 ----
                 
 # Intruções
@@ -28,6 +30,7 @@ $ npm install nodemon -g
 ## 2. Clonar repositório
 
 ```
+$ cd desafioFinal
 $ git clone https://github.com/AndreLuizPedroBotelho/desafioFinal.git 
 
 ```
@@ -41,7 +44,7 @@ $ cp backend/.env.example backend/.env
 
 ## 5. Entrar na pasta mobile e colocar o IP da máquina no arquivo **src/services/api.js**
 
-## 6. Instalar as dependências do projeto
+## 6. Executar na raiz no projeto para instalar as dependências do projeto
 ```
 $ yarn build
 
@@ -66,8 +69,7 @@ $ yarn migrations && yarn seeds
 
 # Observações
 
-#### O projeto mobile só foi desenvolvido para android
-#### Se for utilizar npm,  os arquivos pm2.json e package.json terão que ser alterados
-#### O comando `yarn start` pode demorar, com o comando `pm2 logs` é possivel ver o que esta acontecendo 
+#### O comando `yarn start` pode demorar, com o comando `pm2 logs` é possivel acompanhar o que esta acontecendo 
 #### O comando `yarn start` já vai criar o banco com o nome escolhido na variável de ambiente `DB_NAME` 
-#### Projeto feito em ambiente de linux
+#### Se for utilizar npm, os arquivos pm2.json e package.json terão que ser alterados
+

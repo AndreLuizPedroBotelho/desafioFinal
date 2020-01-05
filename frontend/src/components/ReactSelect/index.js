@@ -51,8 +51,8 @@ export default function ReactSelect({
         placeholder={placeholder}
         onChange={option => set(option)}
         loadOptions={loadOptions}
-        getOptionValue={option => option.title}
-        getOptionLabel={option => option.title}
+        getOptionValue={option => option && option.title}
+        getOptionLabel={option => option && option.title}
       />
     </>
   );

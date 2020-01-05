@@ -113,6 +113,7 @@ export default function PlanCreate({ match }) {
               <Input
                 name="duration"
                 type="number"
+                min="0"
                 value={duration}
                 onChange={e => setDuration(e.target.value)}
               />
