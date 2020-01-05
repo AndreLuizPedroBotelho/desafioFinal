@@ -11,6 +11,7 @@ import api from '~/services/api';
 import {
   Container,
   Table,
+  TableDiv,
   LinkHref,
   Button,
   ContainerTitle,
@@ -78,47 +79,49 @@ export default function Register() {
         </Wrapper>
       </ContainerTitle>
 
-      <Table>
-        <thead>
-          <tr>
-            <th>ALUNO</th>
-            <th>PLANO</th>
-            <th>INÍCIO</th>
-            <th>TÉRMINO</th>
-            <th>ATIVA</th>
-            <th className="actions" />
-          </tr>
-        </thead>
-        <tbody>
-          {registers.length > 0 ? (
-            registers.map(register => (
-              <tr key={register.id}>
-                <td>{register.student.name}</td>
-                <td>{register.plan.title}</td>
-                <td>{register.start_date}</td>
-                <td>{register.end_date}</td>
-                <td>{register.active}</td>
-                <td className="actions">
-                  <LinkHref
-                    to={`/register/save/${register.id}`}
-                    light="true"
-                    color="blue"
-                  >
-                    editar
-                  </LinkHref>
-                  <Button color="red" onClick={() => handleDelete(register)}>
-                    apagar
-                  </Button>
-                </td>
-              </tr>
-            ))
-          ) : (
+      <TableDiv>
+        <Table>
+          <thead>
             <tr>
-              <td className="notFound">Não existe nenhuma matrícula</td>
+              <th>ALUNO</th>
+              <th>PLANO</th>
+              <th>INÍCIO</th>
+              <th>TÉRMINO</th>
+              <th>ATIVA</th>
+              <th className="actions" />
             </tr>
-          )}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {registers.length > 0 ? (
+              registers.map(register => (
+                <tr key={register.id}>
+                  <td>{register.student.name}</td>
+                  <td>{register.plan.title}</td>
+                  <td>{register.start_date}</td>
+                  <td>{register.end_date}</td>
+                  <td>{register.active}</td>
+                  <td className="actions">
+                    <LinkHref
+                      to={`/register/save/${register.id}`}
+                      light="true"
+                      color="blue"
+                    >
+                      editar
+                    </LinkHref>
+                    <Button color="red" onClick={() => handleDelete(register)}>
+                      apagar
+                    </Button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td className="notFound">Não existe nenhuma matrícula</td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </TableDiv>
     </Container>
   );
 }

@@ -53,55 +53,62 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Table = styled.table`
-  width: 100%;
+export const TableDiv = styled.div`
   background-color: #fff;
   padding: 17px 25px;
   margin-top: 20px;
+`;
+
+export const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  display: table;
+
+  tr {
+    display: table-row;
+  }
 
   thead {
-    flex: 0 0 auto;
-    width: calc(100% - 0.9em);
-  }
-
-  tbody {
-    flex: 1 1 auto;
-    display: block;
-    overflow-y: auto;
-    max-height: 60vh;
-    margin-top: 10px;
-  }
-
-  .actions {
-    width: 6rem;
-  }
-
-  .notFound{
-    color:red;
-  }
-  
-  tbody td:first-child ,thead th:first-child{
-    text-align: left;
-  }
-
-  tbody td ,thead th{
+    display: table-header-group;
     text-align: center;
-    word-wrap: break-word;
   }
 
   tbody tr {
     width: 100%;
     padding: 13px 0;
     border-bottom: 1px solid #ddd;
+    height: 3rem;
+  }
+
+  tbody td:first-child,
+  thead th:first-child {
+    text-align: left;
+  }
+  tbody {
+    display: table-row-group;
+  }
+
+  .notFound {
+    color: red;
+  }
+  .actions {
+    text-align: right;
+    width: 100px;
+  }
+
+  tbody td,
+  thead th {
+    text-align: center;
+    word-wrap: break-word;
   }
 
   tbody tr:last-child {
     border-bottom: 0;
   }
 
-  thead,  tbody tr {
-    display: table;
-    table-layout: fixed;
+  td,
+  th {
+    display: table-cell;
   }
 `;
 

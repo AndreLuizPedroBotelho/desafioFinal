@@ -10,6 +10,7 @@ import {
   Container,
   Table,
   Search,
+  TableDiv,
   LinkHref,
   Button,
   ContainerTitle,
@@ -74,44 +75,45 @@ export default function Student() {
           </Search>
         </Wrapper>
       </ContainerTitle>
-
-      <Table>
-        <thead>
-          <tr>
-            <th>NOME</th>
-            <th>E-MAIL</th>
-            <th>IDADE</th>
-            <th className="actions" />
-          </tr>
-        </thead>
-        <tbody>
-          {students.length > 0 ? (
-            students.map(student => (
-              <tr key={student.id}>
-                <td>{student.name}</td>
-                <td>{student.email}</td>
-                <td>{student.age}</td>
-                <td className="actions">
-                  <LinkHref
-                    to={`/student/save/${student.id}`}
-                    light="true"
-                    color="blue"
-                  >
-                    editar
-                  </LinkHref>
-                  <Button color="red" onClick={() => handleDelete(student)}>
-                    apagar
-                  </Button>
-                </td>
-              </tr>
-            ))
-          ) : (
+      <TableDiv>
+        <Table>
+          <thead>
             <tr>
-              <td className="notFound">Não existe nenhum aluno no momento</td>
+              <th>NOME</th>
+              <th>E-MAIL</th>
+              <th>IDADE</th>
+              <th className="actions" />
             </tr>
-          )}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {students.length > 0 ? (
+              students.map(student => (
+                <tr key={student.id}>
+                  <td>{student.name}</td>
+                  <td>{student.email}</td>
+                  <td>{student.age}</td>
+                  <td className="actions">
+                    <LinkHref
+                      to={`/student/save/${student.id}`}
+                      light="true"
+                      color="blue"
+                    >
+                      editar
+                    </LinkHref>
+                    <Button color="red" onClick={() => handleDelete(student)}>
+                      apagar
+                    </Button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td className="notFound">Não existe nenhum aluno no momento</td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </TableDiv>
     </Container>
   );
 }

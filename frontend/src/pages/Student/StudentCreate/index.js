@@ -102,7 +102,7 @@ export default function StudentCreate({ match }) {
         <FormDiv>
           <FormDivLine>
             <label>NOME COMPLETO</label>
-            <Input name="name" />
+            <Input name="name" maxlength="255" />
           </FormDivLine>
 
           <FormDivLine>

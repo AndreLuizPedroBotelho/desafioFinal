@@ -44,59 +44,64 @@ export const Wrapper = styled.div`
     justify-content: center;
     margin-right: 10px;
   }
+`;
 
-
+export const TableDiv = styled.div`
+  background-color: #fff;
+  padding: 17px 25px;
+  margin-top: 20px;
 `;
 
 export const Table = styled.table`
   width: 100%;
-  background-color: #fff;
-  padding: 17px 25px;
-  margin-top: 20px;
+  border-collapse: collapse;
+  display: table;
+
+  tr {
+    display: table-row;
+  }
 
   thead {
-    flex: 0 0 auto;
-    width: calc(100% - 0.9em);
-  }
-
-  tbody {
-    flex: 1 1 auto;
-    display: block;
-    overflow-y: auto;
-    max-height: 60vh;
-    margin-top: 10px;
-  }
-
-  .actions {
-    width: 6rem;
-  }
-
-  tbody td:first-child ,thead th:first-child{
-    text-align: left;
-  }
-
-  tbody td ,thead th{
+    display: table-header-group;
     text-align: center;
-    word-wrap: break-word;
   }
 
   tbody tr {
     width: 100%;
     padding: 13px 0;
     border-bottom: 1px solid #ddd;
+    height: 3rem;
+  }
+
+  tbody td:first-child,
+  thead th:first-child {
+    text-align: left;
+  }
+  tbody {
+    display: table-row-group;
+  }
+
+  .notFound {
+    color: red;
+  }
+  .actions {
+    text-align: right;
+    width: 100px;
+  }
+
+  tbody td,
+  thead th {
+    text-align: center;
+    word-wrap: break-word;
   }
 
   tbody tr:last-child {
     border-bottom: 0;
   }
 
-  .notFound{
-    color:red;
-  }
-  
-  thead,  tbody tr {
-    display: table;
-    table-layout: fixed;
+  td,
+  th {
+    display: table-cell;
   }
 `;
 
@@ -112,31 +117,26 @@ export const Button = styled.button`
 `;
 
 export const Search = styled.div`
-  display:flex;
-  flex-direction:row;
-  justify-content:'center';
-  align-items:center;
-  background-color:#fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: 'center';
+  align-items: center;
+  background-color: #fff;
   border-radius: 4px;
   box-shadow: 0px 6px 16px -4px rgba(99, 93, 99, 0.81);
   padding-left: 22px;
 
-  svg{
+  svg {
     padding: 10;
-    color:#999999!important;
-    margin-right:5px;
+    color: #999999 !important;
+    margin-right: 5px;
   }
 
-  input{
-    display:flex;
+  input {
+    display: flex;
     padding: 10 10 10 0;
-    background-color:#fff;
-    border:0;
-    color:#999999;
-
+    background-color: #fff;
+    border: 0;
+    color: #999999;
   }
 `;
-
-
-
-

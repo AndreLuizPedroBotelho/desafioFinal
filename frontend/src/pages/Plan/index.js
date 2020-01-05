@@ -8,6 +8,7 @@ import api from '~/services/api';
 import {
   Container,
   Table,
+  TableDiv,
   LinkHref,
   Button,
   ContainerTitle,
@@ -73,44 +74,45 @@ export default function Plan() {
           </Link>
         </Wrapper>
       </ContainerTitle>
-
-      <Table>
-        <thead>
-          <tr>
-            <th>TÍTULO</th>
-            <th>DURAÇÃO</th>
-            <th>VALOR p/ MÊS</th>
-            <th className="actions" />
-          </tr>
-        </thead>
-        <tbody>
-          {plans.length > 0 ? (
-            plans.map(plan => (
-              <tr key={plan.id}>
-                <td>{plan.title}</td>
-                <td>{plan.duration}</td>
-                <td>{plan.price}</td>
-                <td className="actions">
-                  <LinkHref
-                    to={`/plan/save/${plan.id}`}
-                    light="true"
-                    color="blue"
-                  >
-                    editar
-                  </LinkHref>
-                  <Button color="red" onClick={() => handleDelete(plan)}>
-                    apagar
-                  </Button>
-                </td>
-              </tr>
-            ))
-          ) : (
+      <TableDiv>
+        <Table>
+          <thead>
             <tr>
-              <td className="notFound">Não existe nenhum plano</td>
+              <th>TÍTULO</th>
+              <th>DURAÇÃO</th>
+              <th>VALOR p/ MÊS</th>
+              <th className="actions" />
             </tr>
-          )}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {plans.length > 0 ? (
+              plans.map(plan => (
+                <tr key={plan.id}>
+                  <td>{plan.title}</td>
+                  <td>{plan.duration}</td>
+                  <td>{plan.price}</td>
+                  <td className="actions">
+                    <LinkHref
+                      to={`/plan/save/${plan.id}`}
+                      light="true"
+                      color="blue"
+                    >
+                      editar
+                    </LinkHref>
+                    <Button color="red" onClick={() => handleDelete(plan)}>
+                      apagar
+                    </Button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td className="notFound">Não existe nenhum plano</td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </TableDiv>
     </Container>
   );
 }

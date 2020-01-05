@@ -111,7 +111,7 @@ export default function PlanCreate({ match }) {
         <FormDiv>
           <FormDivLine>
             <label>TÍTULO DO PLANO</label>
-            <Input name="title" />
+            <Input name="title" maxlength="255" />
           </FormDivLine>
 
           <FormDivLine width={100} divFather>
