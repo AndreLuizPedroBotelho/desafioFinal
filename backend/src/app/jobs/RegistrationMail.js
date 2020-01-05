@@ -6,7 +6,14 @@ class Registration {
   }
 
   async handle({ data }) {
-    const { studentName, price, studentEmail, planTxt, endDate } = data;
+    const {
+      studentName,
+      studentId,
+      price,
+      studentEmail,
+      planTxt,
+      endDate,
+    } = data;
 
     console.log('A fila executou');
 
@@ -17,6 +24,7 @@ class Registration {
       context: {
         studentName,
         price,
+        studentId,
         planTxt,
         endDate,
       },
