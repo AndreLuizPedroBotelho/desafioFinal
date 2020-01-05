@@ -22,7 +22,9 @@ import {
 const maskHeight = /\d{1},\d{2}/g;
 
 const schema = Yup.object().shape({
-  name: Yup.string().required('O nome é obrigatório'),
+  name: Yup.string()
+    .max(255, 'O limte máximo é 255!')
+    .required('O nome é obrigatório'),
   email: Yup.string()
     .email('Insira um e-mail válido')
     .required('O e-mail é obrigatório'),
@@ -102,7 +104,7 @@ export default function StudentCreate({ match }) {
         <FormDiv>
           <FormDivLine>
             <label>NOME COMPLETO</label>
-            <Input name="name" maxlength="255" />
+            <Input name="name" />
           </FormDivLine>
 
           <FormDivLine>

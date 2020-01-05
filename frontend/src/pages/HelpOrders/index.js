@@ -8,7 +8,9 @@ import ModalHelpOrders from './ModalHelpOrders';
 import { Container, Table, Button, ContainerTitle } from './styles';
 
 const schema = Yup.object().shape({
-  answer: Yup.string().required(),
+  answer: Yup.string()
+    .max(255, 'O limte máximo é 255!')
+    .required(),
 });
 
 export default function HelpOrders() {

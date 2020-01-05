@@ -19,7 +19,9 @@ import {
 } from './styles';
 
 const schema = Yup.object().shape({
-  title: Yup.string().required('O título do plano é obrigatório'),
+  title: Yup.string()
+    .max(255, 'O limte máximo é 255!')
+    .required('O título do plano é obrigatório'),
   duration: Yup.number().required('O título do plano é obrigatório'),
   price: Yup.string().required('O título do plano é obrigatório'),
 });
@@ -111,7 +113,7 @@ export default function PlanCreate({ match }) {
         <FormDiv>
           <FormDivLine>
             <label>TÍTULO DO PLANO</label>
-            <Input name="title" maxlength="255" />
+            <Input name="title" />
           </FormDivLine>
 
           <FormDivLine width={100} divFather>
