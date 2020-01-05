@@ -4,9 +4,9 @@ import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import CurrencyFormat from 'react-currency-format';
 import PropTypes from 'prop-types';
+import { MdCheck, MdChevronLeft } from 'react-icons/md';
 import history from '~/services/history';
 import api from '~/services/api';
-import { MdCheck, MdChevronLeft } from 'react-icons/md';
 
 import {
   Container,
@@ -95,10 +95,16 @@ export default function PlanCreate({ match }) {
     <Container>
       <Form schema={schema} onSubmit={handleSubmit} initialData={plan}>
         <ContainerTitle>
-          <span>Cadastro de plano</span>
+          <span>{idPlan ? 'Edição' : 'Cadastro'} de plano</span>
           <Wrapper>
-            <LinkHref to="/plan/"><MdChevronLeft size={20} color="#fff" />VOLTAR</LinkHref>
-            <Button type="submit"><MdCheck size={20} color="#fff" />SALVAR</Button>
+            <LinkHref to="/plan/">
+              <MdChevronLeft size={20} color="#fff" />
+              VOLTAR
+            </LinkHref>
+            <Button type="submit">
+              <MdCheck size={20} color="#fff" />
+              SALVAR
+            </Button>
           </Wrapper>
         </ContainerTitle>
 

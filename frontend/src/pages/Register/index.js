@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -5,8 +6,8 @@ import { toast } from 'react-toastify';
 import { format } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import pt from 'date-fns/locale/pt';
+import { MdAdd, MdCheckCircle } from 'react-icons/md';
 import api from '~/services/api';
-import { MdAdd } from 'react-icons/md';
 
 import {
   Container,
@@ -36,7 +37,11 @@ export default function Register() {
           "dd 'de' MMMM 'de' yyyy",
           { locale: pt }
         );
-        value.active = value.active ? 'SIM' : 'NÃO';
+        value.active = value.active ? (
+          <MdCheckCircle size={20} color="#42cb59" />
+        ) : (
+            <MdCheckCircle size={20} color="#ddd" />
+          );
         return value;
       });
 
@@ -67,7 +72,10 @@ export default function Register() {
       <ContainerTitle>
         <span>Gerenciando matrículas</span>
         <Wrapper>
-          <Link to="/register/save"><MdAdd size={20} color="#fff" />CADASTRAR</Link>
+          <Link to="/register/save">
+            <MdAdd size={20} color="#fff" />
+            CADASTRAR
+          </Link>
         </Wrapper>
       </ContainerTitle>
 
@@ -79,7 +87,7 @@ export default function Register() {
             <th>INÍCIO</th>
             <th>TÉRMINO</th>
             <th>ATIVA</th>
-            <th width="20" />
+            <th className="actions" />
           </tr>
         </thead>
         <tbody>
@@ -98,14 +106,18 @@ export default function Register() {
                     color="blue"
                   >
                     editar
-                </LinkHref>
+                  </LinkHref>
                   <Button color="red" onClick={() => handleDelete(register)}>
                     apagar
-                </Button>
+                  </Button>
                 </td>
               </tr>
             ))
-          ) : (<tr><td className="notFound">Não existe nenhuma matrícula</td></tr>)}
+          ) : (
+              <tr>
+                <td className="notFound">Não existe nenhuma matrícula</td>
+              </tr>
+            )}
         </tbody>
       </Table>
     </Container>

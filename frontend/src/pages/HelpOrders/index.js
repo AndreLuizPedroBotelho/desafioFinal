@@ -80,11 +80,17 @@ export default function HelpOrders() {
                     onClick={() => handleAnswer(helpOrder)}
                   >
                     responder
-                </Button>
+                  </Button>
                 </td>
               </tr>
             ))
-          ) : (<tr><td className="notFound">Não existe nenhum pedido de auxílio no momento</td></tr>)}
+          ) : (
+              <tr>
+                <td className="notFound">
+                  Não existe nenhum pedido de auxílio no momento
+              </td>
+              </tr>
+            )}
         </tbody>
       </Table>
     </Container>

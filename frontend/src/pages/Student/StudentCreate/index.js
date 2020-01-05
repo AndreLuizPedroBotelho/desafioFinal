@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import InputMask from 'react-input-mask';
 import PropTypes from 'prop-types';
+import { MdCheck, MdChevronLeft } from 'react-icons/md';
 import api from '~/services/api';
 import history from '~/services/history';
-import { MdCheck, MdChevronLeft } from 'react-icons/md';
 
 import {
   Container,
@@ -86,10 +86,16 @@ export default function StudentCreate({ match }) {
     <Container>
       <Form schema={schema} onSubmit={handleSubmit} initialData={student}>
         <ContainerTitle>
-          <span>Cadastro de aluno</span>
+          <span>{idStudent ? 'Edição' : 'Cadastro'} de aluno</span>
           <Wrapper>
-            <LinkHref to="/student/"><MdChevronLeft size={20} color="#fff" />VOLTAR</LinkHref>
-            <Button type="submit"><MdCheck size={20} color="#fff" />SALVAR</Button>
+            <LinkHref to="/student/">
+              <MdChevronLeft size={20} color="#fff" />
+              VOLTAR
+            </LinkHref>
+            <Button type="submit">
+              <MdCheck size={20} color="#fff" />
+              SALVAR
+            </Button>
           </Wrapper>
         </ContainerTitle>
 

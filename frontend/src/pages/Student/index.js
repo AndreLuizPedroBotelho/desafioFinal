@@ -1,9 +1,10 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
-import api from '~/services/api';
 import { MdAdd, MdSearch } from 'react-icons/md';
+import api from '~/services/api';
 
 import {
   Container,
@@ -59,7 +60,10 @@ export default function Student() {
       <ContainerTitle>
         <span>Gerenciando alunos</span>
         <Wrapper>
-          <Link to="/student/save"><MdAdd size={20} />CADASTRAR</Link>
+          <Link to="/student/save">
+            <MdAdd size={20} />
+            CADASTRAR
+          </Link>
           <Search>
             <MdSearch size={20} color="#fff" />
             <input
@@ -94,14 +98,18 @@ export default function Student() {
                     color="blue"
                   >
                     editar
-                </LinkHref>
+                  </LinkHref>
                   <Button color="red" onClick={() => handleDelete(student)}>
                     apagar
-                </Button>
+                  </Button>
                 </td>
               </tr>
             ))
-          ) : (<tr><td className="notFound">Não existe nenhum aluno no momento</td></tr>)}
+          ) : (
+              <tr>
+                <td className="notFound">Não existe nenhum aluno no momento</td>
+              </tr>
+            )}
         </tbody>
       </Table>
     </Container>

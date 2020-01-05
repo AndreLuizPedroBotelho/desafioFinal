@@ -5,12 +5,12 @@ import * as Yup from 'yup';
 import { format, parseISO, addMonths, addHours } from 'date-fns';
 
 import PropTypes from 'prop-types';
+import { MdCheck, MdChevronLeft } from 'react-icons/md';
 import api from '~/services/api';
 import history from '~/services/history';
 
 import Datepicker from '~/components/Datepicker';
 import ReactSelect from '~/components/ReactSelect';
-import { MdCheck, MdChevronLeft } from 'react-icons/md';
 
 import {
   Container,
@@ -63,7 +63,7 @@ export default function RegisterCreate({ match }) {
       };
 
       setStudent(studentSelected);
-      // Because
+
       setStartDate(addHours(parseISO(data.start_date), 3));
 
       setRegistration(data);
@@ -166,10 +166,16 @@ export default function RegisterCreate({ match }) {
     <Container>
       <Form schema={schema} onSubmit={handleSubmit} initialData={registration}>
         <ContainerTitle>
-          <span>Cadastro de Matrícula</span>
+          <span>{idRegistration ? 'Edição' : 'Cadastro'} de Matrícula</span>
           <Wrapper>
-            <LinkHref to="/register/"><MdChevronLeft size={20} color="#fff" />VOLTAR</LinkHref>
-            <Button type="submit"><MdCheck size={20} color="#fff" />SALVAR</Button>
+            <LinkHref to="/register/">
+              <MdChevronLeft size={20} color="#fff" />
+              VOLTAR
+            </LinkHref>
+            <Button type="submit">
+              <MdCheck size={20} color="#fff" />
+              SALVAR
+            </Button>
           </Wrapper>
         </ContainerTitle>
 
