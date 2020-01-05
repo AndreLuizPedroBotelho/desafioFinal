@@ -6,7 +6,7 @@ import { Container, TInput } from './styles';
 function Input({ style, ...rest }, ref) {
   return (
     <Container style={style}>
-      <TInput {...rest} ref={ref} />
+      <TInput {...rest} ref={ref} maxLength={255} />
     </Container>
   );
 }
