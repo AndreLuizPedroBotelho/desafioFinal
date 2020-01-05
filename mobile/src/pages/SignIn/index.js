@@ -1,40 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Image } from 'react-native';
+import React, { useState } from 'react';
+import { Image, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Alert } from 'react-native';
 
+import PropTypes from 'prop-types';
 import logo from '~/assets/logo.png';
 import api from '~/services/api';
 
-import {
-  Container,
-  Form,
-  FormInput,
-  SubmitButton,
-} from './styles';
+import { Container, Form, FormInput, SubmitButton } from './styles';
 
 export default function SignIn({ navigation }) {
   const [idStudent, setIdStudent] = useState('');
   const [loading, setLoading] = useState(false);
 
-
   async function handleSubmit() {
     try {
       const { data } = await api.post('/sessionStudent/', {
-        id: idStudent
+        id: idStudent,
       });
 
       setLoading(true);
       await AsyncStorage.setItem('student', String(data.id));
 
-      navigation.navigate('Checkin')
+      navigation.navigate('Checkin');
     } catch (err) {
       Alert.alert(
         'Falha na autenticação!',
         'Verifique se o ID de cadastro esta correto, se o erro persister entre em contato com a equipe gympoint!'
       );
     }
-
   }
 
   return (
@@ -55,7 +48,12 @@ export default function SignIn({ navigation }) {
           Entrar no sistema
         </SubmitButton>
       </Form>
-
     </Container>
   );
 }
+
+SignIn.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

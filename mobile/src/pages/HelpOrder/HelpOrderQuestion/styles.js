@@ -5,8 +5,8 @@ import Input from '~/components/Input';
 import Button from '~/components/Button';
 
 export const Background = styled.View`
-  background-color:#f5f5f5;
-  height:100%;
+  background-color: #f5f5f5;
+  height: 100%;
 `;
 
 export const Container = styled.KeyboardAvoidingView.attrs({
@@ -26,7 +26,7 @@ export const Form = styled.View`
 export const FormInput = styled(Input)`
   margin-bottom: 10px;
   justify-content: flex-start;
-  background-color:#fff;
+  background-color: #fff;
 `;
 
 export const SubmitButton = styled(Button)`

@@ -17,13 +17,13 @@ export const Loading = styled(ActivityIndicator)`
 export const List = styled.FlatList.attrs({
   showsVerticalScrollIndicator: true,
 })`
-    margin-top: 5%;
-    width: 90%;  
+  margin-top: 5%;
+  width: 90%;
 `;
 
 export const Background = styled.View`
-  background-color:#f5f5f5;
-  height:100%;
+  background-color: #f5f5f5;
+  height: 100%;
 `;
 
 export const Container = styled.KeyboardAvoidingView.attrs({
@@ -33,4 +33,3 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   align-items: center;
   padding: 0 20px;
 `;
-

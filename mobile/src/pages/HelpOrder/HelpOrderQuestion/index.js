@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Image, Alert } from 'react-native';
+import PropTypes from 'prop-types';
 import logo from '~/assets/logo-header.png';
-import { Image, Alert, Text } from 'react-native';
 
 import { SubmitButton, Form, FormInput, Container, Background } from './styles';
 
@@ -12,40 +13,32 @@ export default function HelpOrderQuestion({ navigation }) {
   const [student, setStudent] = useState();
 
   useEffect(() => {
-    AsyncStorage.getItem('student').then(student => {
-      setStudent(student)
+    AsyncStorage.getItem('student').then(newStudent => {
+      setStudent(newStudent);
     });
-  }, []);
+  }, [student]);
 
   async function handleSubmit() {
     try {
       await api.post(`/students/${student}/help-orders`, {
-        question
+        question,
       });
 
-      Alert.alert(
-        'Confirmação!',
-        'Pedido de Auxílio cadastrado com sucesso!'
-      );
+      Alert.alert('Confirmação!', 'Pedido de Auxílio cadastrado com sucesso!');
 
-      navigation.navigate('HelpOrderList')
-
+      navigation.navigate('HelpOrderList');
     } catch (err) {
-      Alert.alert(
-        '',
-        'Não foi possível cadastrar o Pedido de Auxílio!'
-      );
+      Alert.alert('', 'Não foi possível cadastrar o Pedido de Auxílio!');
     }
   }
 
-
   return (
     <Background>
-      <Container >
-        <Form >
+      <Container>
+        <Form>
           <FormInput
-            textAlignVertical='top'
-            multiline={true}
+            textAlignVertical="top"
+            multiline
             numberOfLines={12}
             autoCorrect={false}
             autoCapitalize="none"
@@ -55,9 +48,7 @@ export default function HelpOrderQuestion({ navigation }) {
             onChangeText={setQuestion}
           />
 
-          <SubmitButton onPress={handleSubmit}>
-            Enviar pedido
-          </SubmitButton>
+          <SubmitButton onPress={handleSubmit}>Enviar pedido</SubmitButton>
         </Form>
       </Container>
     </Background>
@@ -66,4 +57,10 @@ export default function HelpOrderQuestion({ navigation }) {
 
 HelpOrderQuestion.navigationOptions = {
   headerTitle: <Image resizeMode="contain" source={logo} />,
-}
+};
+
+HelpOrderQuestion.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

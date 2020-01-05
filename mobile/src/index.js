@@ -9,7 +9,7 @@ export default function Index() {
 
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="#fff" />
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <App />
     </>
   );

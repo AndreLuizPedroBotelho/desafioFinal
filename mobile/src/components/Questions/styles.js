@@ -6,10 +6,10 @@ export const Container = styled.TouchableOpacity`
   margin-bottom: 15px;
   border-radius: 4px;
   width: 100%;
-  margin-right:20px;
+  margin-right: 20px;
   display: flex;
   flex-direction: column;
-  border:1px solid #fff;
+  border: 1px solid #fff;
 `;
 
 export const Wraper = styled.View`
@@ -20,22 +20,22 @@ export const Wraper = styled.View`
 `;
 
 export const Question = styled.View`
-  margin-left:10px;
-  margin-top:10px;
-  line-height:18px;
+  margin-left: 10px;
+  margin-top: 10px;
+  line-height: 18px;
   text-align: left;
 `;
 
 export const QuestionText = styled.Text`
-  line-height:18px;
+  line-height: 18px;
   text-align: left;
-  width:100%;
+  width: 100%;
   color: #666666;
 `;
 
 export const Left = styled.View`
   font-size: 14px;
-  margin-left:30px;
+  margin-left: 30px;
 `;
 
 export const Title = styled.Text`
@@ -51,10 +51,3 @@ export const Right = styled.View`
   color: #666666;
   margin-right: 10px;
 `;
-
-
-
-
-
-
-

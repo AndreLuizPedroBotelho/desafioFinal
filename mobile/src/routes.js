@@ -2,6 +2,7 @@ import React from 'react';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import PropTypes from 'prop-types';
 
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -13,20 +14,35 @@ import HelpOrderAnswer from './pages/HelpOrder/HelpOrderAnswer';
 import HelpOrderList from './pages/HelpOrder/HelpOrderList';
 import HelpOrderQuestion from './pages/HelpOrder/HelpOrderQuestion';
 
+const helpOrderIcon = ({ tintColor }) => (
+  <Icon name="live-help" size={20} color={tintColor} />
+);
+
+const checkinIcon = ({ tintColor }) => (
+  <Icon name="edit-location" size={20} color={tintColor} />
+);
+
+helpOrderIcon.propTypes = {
+  tintColor: PropTypes.string.isRequired,
+};
+checkinIcon.propTypes = {
+  tintColor: PropTypes.string.isRequired,
+};
 
 export default () =>
   createAppContainer(
     createSwitchNavigator(
       {
         Sign: createSwitchNavigator({
-          SignIn
+          SignIn,
         }),
         App: createBottomTabNavigator(
           {
             Checkin: {
-              screen: createStackNavigator({
-                Checkin
-              },
+              screen: createStackNavigator(
+                {
+                  Checkin,
+                },
                 {
                   headerLayoutPreset: 'center',
                   headerTitleAlign: 'center',
@@ -35,29 +51,25 @@ export default () =>
 
               navigationOptions: {
                 title: 'Check-ins',
-                tabBarIcon: ({ tintColor }) => (
-                  <Icon name="edit-location" size={20} color={tintColor} />
-                ),
-              }
+                tabBarIcon: checkinIcon,
+              },
             },
             HelpOrder: {
-              screen: createStackNavigator({
-                HelpOrderList,
-                HelpOrderAnswer,
-                HelpOrderQuestion,
-              },
+              screen: createStackNavigator(
+                {
+                  HelpOrderList,
+                  HelpOrderAnswer,
+                  HelpOrderQuestion,
+                },
                 {
                   headerLayoutPreset: 'center',
                   headerTitleAlign: 'center',
-                },
+                }
               ),
               navigationOptions: {
                 title: 'Pedir ajuda',
-                tabBarIcon: ({ tintColor }) => (
-                  <Icon name="live-help" size={20} color={tintColor} />
-                ),
+                tabBarIcon: helpOrderIcon,
               },
-
             },
           },
           {
@@ -79,7 +91,6 @@ export default () =>
       },
       {
         initialRouteName: 'Sign',
-
       }
     )
   );

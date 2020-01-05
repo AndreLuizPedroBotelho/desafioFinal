@@ -1,13 +1,17 @@
 import React, { useMemo } from 'react';
 import { parseISO, formatRelative } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { Text } from 'react-native';
+import PropTypes from 'prop-types';
 
 import {
   Container,
   QuestionText,
   TitleDate,
-  Wraper, Title, Left, Right, Question
+  Wraper,
+  Title,
+  Left,
+  Right,
+  Question,
 } from './styles';
 
 export default function Questions({ data, handlePress }) {
@@ -18,29 +22,38 @@ export default function Questions({ data, handlePress }) {
       addSuffix: true,
     });
 
-    return dateFormated.charAt(0).toUpperCase() + dateFormated.slice(1)
-  }, [data.date]);
+    return dateFormated.charAt(0).toUpperCase() + dateFormated.slice(1);
+  }, [data.answer_at, data.updatedAt]);
 
   return (
     <Container onPress={() => handlePress(data)}>
       <Wraper>
-        <Left >
+        <Left>
           <Title answer={data.answer_at}>
             {data.answer_at ? 'Respondido' : 'Sem resposta'}
           </Title>
         </Left>
         <Right>
-          <TitleDate>
-            {dateParsed}
-          </TitleDate>
+          <TitleDate>{dateParsed}</TitleDate>
         </Right>
       </Wraper>
       <Question>
-        <QuestionText numberOfLines={3} >
-          {data.question}
-        </QuestionText>
+        <QuestionText numberOfLines={3}>{data.question}</QuestionText>
       </Question>
-
-    </Container >
+    </Container>
   );
 }
+
+Questions.propTypes = {
+  data: PropTypes.shape({
+    question: PropTypes.string.isRequired,
+    answer_at: PropTypes.string,
+    updatedAt: PropTypes.string,
+  }),
+  handlePress: PropTypes.func,
+};
+
+Questions.defaultProps = {
+  data: {},
+  handlePress: () => {},
+};

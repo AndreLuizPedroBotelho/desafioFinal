@@ -17,7 +17,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'jsx-ally', 'import', 'prettier'],
+  plugins: ['react', 'jsx-a11y', 'import', 'react-hooks', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
     'react/jsx-filename-extension': [
@@ -34,11 +34,12 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-underscore-dangle': 'off',
     camelcase: 'off',
-    'no--console': ['error', { allow: ['tron'] }],
+    'no--console': ['error', { allow: ['tron', 'disableYellowBox'] }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
     'react/state-in-constructor': 'off',
-    'react-hooks/exhaustive-deps': 'off'
+    'no--console': 'off',
+    'react/jsx-props-no-spreading': 'off'
   },
   settings: {
     'import/resolver': {

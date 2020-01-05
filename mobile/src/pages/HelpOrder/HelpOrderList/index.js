@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Image } from 'react-native';
+import { NavigationEvents } from 'react-navigation';
+import PropTypes from 'prop-types';
 import logo from '~/assets/logo-header.png';
-import { Image, Alert, Text } from 'react-native';
 
 import { ButtonClick, Container, Loading, Background, List } from './styles';
-import { NavigationEvents } from 'react-navigation'
 
 import api from '~/services/api';
 import Questions from '~/components/Questions';
@@ -18,8 +19,8 @@ export default function HelpOrderList({ navigation }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AsyncStorage.getItem('student').then(student => {
-      setStudent(student);
+    AsyncStorage.getItem('student').then(newStudent => {
+      setStudent(newStudent);
       setHelpOrderListChange(true);
     });
   }, []);
@@ -33,24 +34,22 @@ export default function HelpOrderList({ navigation }) {
         setLoading(false);
       }
     }
-    loadHelpOrderAnswer()
+    loadHelpOrderAnswer();
   }, [helpOrderListChange, student]);
 
   function handlePress(data) {
     navigation.navigate('HelpOrderAnswer', { data });
   }
 
-  function handleChange(data) {
+  function handleChange() {
     setLoading(true);
     setHelpOrderListChange(true);
   }
 
   return (
     <Background>
-      <Container >
-        <NavigationEvents
-          onDidFocus={payload => handleChange()}
-        />
+      <Container>
+        <NavigationEvents onDidFocus={() => handleChange()} />
         <ButtonClick onPress={() => navigation.navigate('HelpOrderQuestion')}>
           Novo pedido de auxílio
         </ButtonClick>
@@ -58,22 +57,28 @@ export default function HelpOrderList({ navigation }) {
         {loading ? (
           <Loading size="large" color="#EE4E62" />
         ) : (
-            <List
-              loading={loading}
-              vertical
-              inverted
-              data={helpOrderList}
-              keyExtrator={item => String(item.id)}
-              renderItem={({ item }) => (
-                <Questions data={item} handlePress={handlePress} />
-              )}
-            />
-          )}
+          <List
+            loading={loading}
+            vertical
+            inverted
+            data={helpOrderList}
+            keyExtrator={item => String(item.id)}
+            renderItem={({ item }) => (
+              <Questions data={item} handlePress={handlePress} />
+            )}
+          />
+        )}
       </Container>
-    </Background >
+    </Background>
   );
 }
 
 HelpOrderList.navigationOptions = {
   headerTitle: <Image resizeMode="contain" source={logo} />,
-}
+};
+
+HelpOrderList.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

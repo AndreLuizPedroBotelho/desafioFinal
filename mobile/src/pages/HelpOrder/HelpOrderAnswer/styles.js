@@ -5,18 +5,18 @@ export const Container = styled.TouchableOpacity`
   margin-bottom: 15px;
   border-radius: 4px;
   width: 90%;
-  margin-right:20px;
+  margin-right: 20px;
   display: flex;
   height: 300px;
   flex-direction: column;
-  border:1px solid #fff;
+  border: 1px solid #fff;
   margin-top: 8%;
   margin-left: 5%;
   margin-right: 5%;
 `;
 
 export const Content = styled.TouchableOpacity`
-  margin:20px;
+  margin: 20px;
 `;
 
 export const Wraper = styled.View`
@@ -25,15 +25,14 @@ export const Wraper = styled.View`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 15px;
-  &.wrapperText{
+  &.wrapperText {
     margin-top: 15px;
   }
-
 `;
 
 export const Background = styled.View`
-  background-color:#f5f5f5;
-  height:100%;
+  background-color: #f5f5f5;
+  height: 100%;
 `;
 
 export const Left = styled.View`
@@ -42,7 +41,7 @@ export const Left = styled.View`
 
 export const Title = styled.Text`
   color: #444444;
-  font-weight:bold;
+  font-weight: bold;
   margin-top: 8%;
 `;
 
