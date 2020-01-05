@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -40,8 +39,8 @@ export default function Register() {
         value.active = value.active ? (
           <MdCheckCircle size={20} color="#42cb59" />
         ) : (
-            <MdCheckCircle size={20} color="#ddd" />
-          );
+          <MdCheckCircle size={20} color="#ddd" />
+        );
         return value;
       });
 
@@ -114,10 +113,10 @@ export default function Register() {
               </tr>
             ))
           ) : (
-              <tr>
-                <td className="notFound">Não existe nenhuma matrícula</td>
-              </tr>
-            )}
+            <tr>
+              <td className="notFound">Não existe nenhuma matrícula</td>
+            </tr>
+          )}
         </tbody>
       </Table>
     </Container>

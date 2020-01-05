@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
+import { MdAdd } from 'react-icons/md';
 import api from '~/services/api';
 
 import {
@@ -12,8 +13,6 @@ import {
   ContainerTitle,
   Wrapper,
 } from './styles';
-
-import { MdAdd } from 'react-icons/md';
 
 export default function Plan() {
   const [plans, setPlans] = useState([]);
@@ -68,7 +67,10 @@ export default function Plan() {
       <ContainerTitle>
         <span>Gerenciando planos</span>
         <Wrapper>
-          <Link to="/plan/save"><MdAdd size={20} color="#fff" />CADASTRAR</Link>
+          <Link to="/plan/save">
+            <MdAdd size={20} color="#fff" />
+            CADASTRAR
+          </Link>
         </Wrapper>
       </ContainerTitle>
 
@@ -95,14 +97,18 @@ export default function Plan() {
                     color="blue"
                   >
                     editar
-                </LinkHref>
+                  </LinkHref>
                   <Button color="red" onClick={() => handleDelete(plan)}>
                     apagar
-                </Button>
+                  </Button>
                 </td>
               </tr>
             ))
-          ) : (<tr><td className="notFound">Não existe nenhum plano</td></tr>)}
+          ) : (
+            <tr>
+              <td className="notFound">Não existe nenhum plano</td>
+            </tr>
+          )}
         </tbody>
       </Table>
     </Container>

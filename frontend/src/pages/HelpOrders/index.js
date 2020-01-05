@@ -85,12 +85,12 @@ export default function HelpOrders() {
               </tr>
             ))
           ) : (
-              <tr>
-                <td className="notFound">
-                  Não existe nenhum pedido de auxílio no momento
+            <tr>
+              <td className="notFound">
+                Não existe nenhum pedido de auxílio no momento
               </td>
-              </tr>
-            )}
+            </tr>
+          )}
         </tbody>
       </Table>
     </Container>
