@@ -13,6 +13,8 @@ import {
   Wrapper,
 } from './styles';
 
+import { MdAdd } from 'react-icons/md';
+
 export default function Plan() {
   const [plans, setPlans] = useState([]);
   const [plansChange, setPlansChange] = useState();
@@ -66,7 +68,7 @@ export default function Plan() {
       <ContainerTitle>
         <span>Gerenciando planos</span>
         <Wrapper>
-          <Link to="/plan/save">CADASTRAR</Link>
+          <Link to="/plan/save"><MdAdd size={20} color="#fff" />CADASTRAR</Link>
         </Wrapper>
       </ContainerTitle>
 

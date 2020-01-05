@@ -26,8 +26,8 @@ export default createGlobalStyle`
     background:#f5f5f5;
   }
 
-  body,input,button{
-    font-size:14px 'Roboto', sans-serif;
+  body,input,button,a{
+    font:14px 'Roboto', sans-serif !important;
   }
 
   a{

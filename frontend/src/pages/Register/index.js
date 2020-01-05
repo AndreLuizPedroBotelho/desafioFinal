@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import pt from 'date-fns/locale/pt';
 import api from '~/services/api';
+import { MdAdd } from 'react-icons/md';
 
 import {
   Container,
@@ -66,7 +67,7 @@ export default function Register() {
       <ContainerTitle>
         <span>Gerenciando matrículas</span>
         <Wrapper>
-          <Link to="/register/save">CADASTRAR</Link>
+          <Link to="/register/save"><MdAdd size={20} color="#fff" />CADASTRAR</Link>
         </Wrapper>
       </ContainerTitle>
 

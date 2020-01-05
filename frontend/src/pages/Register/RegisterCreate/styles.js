@@ -33,7 +33,7 @@ export const Wrapper = styled.div`
   height: 100%;
   a,
   button {
-    width: 111px;
+    width: 124px;
     height: 35px;
     border: none;
     font-size: 14px;
@@ -43,11 +43,13 @@ export const Wrapper = styled.div`
     cursor: pointer;
     text-align: right;
     padding-right: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   a {
     background: #cccccc;
-    padding-top: 10px;
     margin-right: 19px;
   }
 
@@ -125,5 +127,4 @@ export const LinkHref = styled(Link)`
 
 export const Button = styled.button`
   color: ${props => (!props.light ? props.color : lighten(0.1, props.color))};
-  margin-right: 5px;
 `;

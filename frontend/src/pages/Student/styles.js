@@ -37,10 +37,12 @@ export const Wrapper = styled.div`
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
-    margin-right: 19px;
     text-align: right;
     padding-right: 14px;
-    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
   }
 
   input {

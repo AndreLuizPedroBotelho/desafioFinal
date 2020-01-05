@@ -23,16 +23,15 @@
 ## 1. Instalar pm2 globalmente e nodemon globalmente
 
 ```
-$ npm install pm2 -g 
-$ npm install nodemon -g 
+$ sudo npm install pm2 -g 
+$ sudo npm install nodemon -g 
 
 ```
 ## 2. Clonar repositório
 
 ```
-$ cd desafioFinal
 $ git clone https://github.com/AndreLuizPedroBotelho/desafioFinal.git 
-
+$ cd desafioFinal
 ```
 
 ## 3. Criar aquivo **.env** baseado no arquivo **.env-example** na pasta backend
@@ -49,21 +48,22 @@ $ cp backend/.env.example backend/.env
 $ yarn build
 
 ```
-## 7. Com o aparelho android conectado, executar o comando   
-```
-$ yarn start-android
 
-```
-
-## 8. Inicializar o projeto 
+## 7. Inicializar o projeto 
 ```
 $ yarn start
 
 ```
-## 9. Executar migrations e seeds 
+## 8. Executar migrations e seeds 
 
 ```
 $ yarn migrations && yarn seeds  
+
+```
+
+## 9. Com o aparelho android conectado, executar o comando   
+```
+$ yarn start-android
 
 ```
 

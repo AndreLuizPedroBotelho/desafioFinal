@@ -10,6 +10,7 @@ import history from '~/services/history';
 
 import Datepicker from '~/components/Datepicker';
 import ReactSelect from '~/components/ReactSelect';
+import { MdCheck, MdChevronLeft } from 'react-icons/md';
 
 import {
   Container,
@@ -167,8 +168,8 @@ export default function RegisterCreate({ match }) {
         <ContainerTitle>
           <span>Cadastro de Matrícula</span>
           <Wrapper>
-            <LinkHref to="/register/">VOLTAR</LinkHref>
-            <Button type="submit">SALVAR</Button>
+            <LinkHref to="/register/"><MdChevronLeft size={20} color="#fff" />VOLTAR</LinkHref>
+            <Button type="submit"><MdCheck size={20} color="#fff" />SALVAR</Button>
           </Wrapper>
         </ContainerTitle>
 

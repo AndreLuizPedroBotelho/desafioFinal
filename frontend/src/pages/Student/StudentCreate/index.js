@@ -7,6 +7,7 @@ import InputMask from 'react-input-mask';
 import PropTypes from 'prop-types';
 import api from '~/services/api';
 import history from '~/services/history';
+import { MdCheck, MdChevronLeft } from 'react-icons/md';
 
 import {
   Container,
@@ -87,8 +88,8 @@ export default function StudentCreate({ match }) {
         <ContainerTitle>
           <span>Cadastro de aluno</span>
           <Wrapper>
-            <LinkHref to="/student/">VOLTAR</LinkHref>
-            <Button type="submit">SALVAR</Button>
+            <LinkHref to="/student/"><MdChevronLeft size={20} color="#fff" />VOLTAR</LinkHref>
+            <Button type="submit"><MdCheck size={20} color="#fff" />SALVAR</Button>
           </Wrapper>
         </ContainerTitle>
 
